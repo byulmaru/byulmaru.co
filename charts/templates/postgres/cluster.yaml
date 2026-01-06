@@ -1,0 +1,48 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgres
+spec:
+  instances: 1
+
+  primaryUpdateStrategy: unsupervised
+  primaryUpdateMethod: switchover
+
+  postgresql:
+    pg_hba:
+      - host all all all scram-sha-256
+
+  bootstrap:
+    initdb:
+      database: app
+      owner: app
+      secret:
+        name: postgres-user
+
+  storage:
+    size: 50Gi
+    storageClass: oci-bv
+
+  # plugins:
+  #   - name: barman-cloud.cloudnative-pg.io
+  #     isWALArchiver: true
+  #     parameters:
+  #       barmanObjectName: oci-object-storage
+
+  managed:
+    roles:
+      - name: app
+        ensure: present
+        login: true
+        replication: true
+        connectionLimit: -1
+        inRoles:
+          - pg_monitor
+
+  resources:
+    requests:
+      memory: "1Gi"
+      cpu: "125m"
+    limits:
+      memory: "1Gi"
+      cpu: "125m"

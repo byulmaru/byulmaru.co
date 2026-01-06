@@ -1,0 +1,95 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: id
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: 8080
+      name: id
+  selector:
+    app: id
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: id
+  annotations:
+    secrets.infisical.com/auto-reload: 'true'
+  labels:
+    app: id
+spec:
+  selector:
+    matchLabels:
+      app: id
+  template:
+    metadata:
+      labels:
+        app: id
+    spec:
+      enableServiceLinks: false
+      containers:
+        - name: id
+          image: ghcr.io/byulmaru/id
+          envFrom:
+            - secretRef:
+                name: env
+          resources:
+            requests:
+              cpu: '100m'
+              memory: '256Mi'
+            limits:
+              cpu: '500m'
+              memory: '1Gi'
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                  - key: oci.oraclecloud.com/oke-is-preemptible
+                    operator: Exists
+                    values: []
+      tolerations:
+        - key: 'oci.oraclecloud.com/oke-is-preemptible'
+          operator: 'Equal'
+          value: 'present'
+          effect: 'NoSchedule'
+      priorityClassName: preemptible
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: id
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: id
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: id
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: id
+  minReplicas: 2
+  maxReplicas: 5
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 80
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 60
+      policies:
+        - type: Pods
+          value: 1
+          periodSeconds: 60

@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - id.byulmaru.co
+      secretName: certificate
+  rules:
+    - host: id.byulmaru.co
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: id
+                port:
+                  number: 8080

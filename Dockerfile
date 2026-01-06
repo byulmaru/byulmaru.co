@@ -9,7 +9,7 @@ RUN pnpm run build
 
 # Production stage
 FROM base AS release
-COPY --from=build /app/build ./
+COPY --from=build /app/build ./build/
 COPY --from=build /app/package.json ./
 
 # Set production environment
