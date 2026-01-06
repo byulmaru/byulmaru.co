@@ -18,8 +18,5 @@
   ],
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "typescript.tsdk": "node_modules/typescript/lib",
-  "typescript.preferences.includePackageJsonAutoImports": "auto",
-  "[svelte]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  }
+  "typescript.preferences.includePackageJsonAutoImports": "auto"
 }
