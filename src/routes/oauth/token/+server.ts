@@ -18,6 +18,7 @@ import {
 import { createIdToken } from '$lib/server/oidc/jwt';
 import { isOIDCRequest } from '$lib/server/oidc/scopes';
 import { uriToRedirectUrl } from '$lib/url';
+import { randomId } from '$lib/server/id';
 
 const schema = z.object({
   grant_type: z.enum(['authorization_code']),
@@ -93,7 +94,7 @@ export const POST = async ({ request }) => {
       applicationId: applicationToken.applicationId,
       accountId: applicationToken.accountId,
       scopes: applicationToken.scopes,
-      token: crypto.randomUUID(),
+      token: randomId(),
     })
     .returning({
       token: Sessions.token,

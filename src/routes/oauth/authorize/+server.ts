@@ -13,6 +13,7 @@ import {
 } from '$lib/server/db';
 import { supportedScopeSchema, validateScopes } from '$lib/server/oidc/scopes';
 import { uriToRedirectUrl } from '$lib/url';
+import { randomId } from '$lib/server/id';
 
 const OAuthAuthorizeSchema = z.object({
   response_type: z.enum(['code']),
@@ -66,7 +67,7 @@ export const GET = async ({ cookies, url, locals }) => {
             accountId: session.account.id,
             applicationId: application.id,
             redirectUriId: application.redirectUriId!,
-            token: crypto.randomUUID(),
+            token: randomId(),
             scopes: scope,
             expiresAt: Temporal.Now.instant().add({ minutes: 5 }),
           })

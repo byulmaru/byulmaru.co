@@ -2,6 +2,7 @@ import { configure, getConsoleSink } from '@logtape/logtape';
 import { and, eq, isNotNull, isNull } from 'drizzle-orm';
 import { env as publicEnv } from '$env/dynamic/public';
 import { Accounts, db, Emails, first, Sessions } from '$lib/server/db';
+import { randomId } from '$lib/server/id';
 
 export const init = async () => {
   await configure({
@@ -16,7 +17,7 @@ export const init = async () => {
 export const handle = async ({ event, resolve }) => {
   let deviceId = event.cookies.get('deviceid');
   if (!deviceId) {
-    deviceId = crypto.randomUUID();
+    deviceId = randomId();
     event.cookies.set('deviceid', deviceId, {
       httpOnly: true,
       secure: true,

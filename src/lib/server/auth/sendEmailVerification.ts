@@ -6,15 +6,14 @@ import { sendEmail } from '../email';
 import AddEmailVerification from '../email/templates/AddEmailVerification';
 import Login from '../email/templates/Login';
 import Signup from '../email/templates/Signup';
+import { randomInt } from 'node:crypto';
 
 export const sendEmailVerification = async (
   email: typeof Emails.$inferSelect,
   purpose: 'LOGIN' | 'SIGN_UP' | 'ADD_EMAIL',
   siteOrigin: string,
 ) => {
-  const token = Math.floor(Math.random() * 1000000)
-    .toString()
-    .padStart(6, '0');
+  const token = randomInt(1000000).toString().padStart(6, '0');
 
   const account = email.accountId
     ? await db.select().from(Accounts).where(eq(Accounts.id, email.accountId)).then(first)

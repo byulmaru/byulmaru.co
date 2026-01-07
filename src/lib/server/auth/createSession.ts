@@ -2,6 +2,7 @@ import { env as publicEnv } from '$env/dynamic/public';
 import { db, firstOrThrow, Sessions } from '../db';
 import type { Cookies } from '@sveltejs/kit';
 import type { Transaction } from '../db';
+import { randomId } from '../id';
 
 type CreateSessionParams = {
   accountId: string;
@@ -16,7 +17,7 @@ export const createSession = async ({ accountId, cookies, ...params }: CreateSes
     .insert(Sessions)
     .values({
       accountId,
-      token: crypto.randomUUID(),
+      token: randomId(),
     })
     .returning()
     .then(firstOrThrow);
