@@ -17,7 +17,7 @@
       <CardTitle class="text-center text-2xl">인증번호 입력</CardTitle>
     </CardHeader>
     <CardContent>
-      <p class="text-center text-sm text-gray-500 mb-6">
+      <p class="mb-6 text-center text-sm text-gray-500">
         {data.email} 으로 전송된 인증번호를 입력해주세요.
       </p>
       <form class="flex flex-col gap-2" method="post" use:enhance>

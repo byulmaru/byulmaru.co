@@ -16,7 +16,11 @@
 
 <script lang="ts">
   import { ChevronRightIcon, KeyRoundIcon, MailIcon } from '@lucide/svelte';
-  import { browserSupportsWebAuthnAutofill, startAuthentication, WebAuthnAbortService } from '@simplewebauthn/browser';
+  import {
+    browserSupportsWebAuthnAutofill,
+    startAuthentication,
+    WebAuthnAbortService,
+  } from '@simplewebauthn/browser';
   import { onMount } from 'svelte';
   import { superForm } from 'sveltekit-superforms';
   import { goto, pushState, replaceState } from '$app/navigation';
@@ -43,7 +47,7 @@
     resetForm: false,
     invalidateAll: false,
     onUpdate: ({ form, result }) => {
-      if(result.type === 'success') {
+      if (result.type === 'success') {
         if (form.message?.preferredMethod === 'PASSKEY') {
           pushState('', { phase: 'PASSKEY' });
           startPasskeyAuthentication({ optionsJSON: form.message.optionsJSON });
@@ -56,7 +60,7 @@
     optionsJSON,
     useBrowserAutofill,
   }: StartPasskeyAuthenticationParams = {}) => {
-    if(!optionsJSON) {
+    if (!optionsJSON) {
       optionsJSON = await generatePasskeyAuthenticationOptions({ email: $form.email || undefined });
     }
 
@@ -106,8 +110,21 @@
           </Empty.Header>
           <Empty.Content>
             <div class="flex flex-row gap-2">
-              <Button onclick={() => { WebAuthnAbortService.cancelCeremony(); reset(); history.back(); }} variant="ghost">돌아가기</Button>
-              <Button onclick={() => { WebAuthnAbortService.cancelCeremony(); replaceState('', { phase: 'SELECT_METHOD' }); }} variant="outline">다른 방법으로 로그인</Button>
+              <Button
+                onclick={() => {
+                  WebAuthnAbortService.cancelCeremony();
+                  reset();
+                  history.back();
+                }}
+                variant="ghost">돌아가기</Button
+              >
+              <Button
+                onclick={() => {
+                  WebAuthnAbortService.cancelCeremony();
+                  replaceState('', { phase: 'SELECT_METHOD' });
+                }}
+                variant="outline">다른 방법으로 로그인</Button
+              >
             </div>
           </Empty.Content>
         </Empty.Root>
@@ -115,7 +132,13 @@
     {:else if page.state.phase === 'SELECT_METHOD'}
       <CardContent class="flex flex-col gap-2">
         <h2 class="text-center text-lg font-medium">{$form.email}</h2>
-        <button class="w-full" onclick={() => { replaceState('', { phase: 'PASSKEY' }); startPasskeyAuthentication(); }}>
+        <button
+          class="w-full"
+          onclick={() => {
+            replaceState('', { phase: 'PASSKEY' });
+            startPasskeyAuthentication();
+          }}
+        >
           <Item.Root variant="outline">
             <Item.Media>
               <KeyRoundIcon />
@@ -149,7 +172,14 @@
         {/if}
       </CardContent>
       <CardFooter>
-        <Button class="w-full" onclick={() => { reset(); history.back(); }} variant="ghost">돌아가기</Button>
+        <Button
+          class="w-full"
+          onclick={() => {
+            reset();
+            history.back();
+          }}
+          variant="ghost">돌아가기</Button
+        >
       </CardFooter>
     {:else}
       <form class="flex flex-col gap-2" method="post" use:enhance>

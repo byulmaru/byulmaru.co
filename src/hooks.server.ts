@@ -1,5 +1,5 @@
 import { configure, getConsoleSink } from '@logtape/logtape';
-import { and, eq, isNull } from 'drizzle-orm';
+import { and, eq, isNotNull, isNull } from 'drizzle-orm';
 import { env as publicEnv } from '$env/dynamic/public';
 import { Accounts, db, Emails, first, Sessions } from '$lib/server/db';
 
@@ -28,35 +28,56 @@ export const handle = async ({ event, resolve }) => {
 
   event.locals.deviceId = deviceId;
 
-  const sessionToken = event.cookies.get('session');
+  const headerToken =
+    event.request.headers.get('Authorization')?.match(/^Bearer\s+(.*)$/)?.[1] ?? null;
+  if (headerToken) {
+    const session = await db
+      .select({
+        accountId: Sessions.accountId,
+        applicationId: Sessions.applicationId,
+        scopes: Sessions.scopes,
+      })
+      .from(Sessions)
+      .where(and(eq(Sessions.token, headerToken), isNotNull(Sessions.applicationId)))
+      .then(first);
 
-  const account = sessionToken
-    ? await db
-        .select({
-          id: Accounts.id,
-          name: Accounts.name,
-          primaryEmail: Emails.email,
-          primaryEmailId: Accounts.primaryEmailId,
-        })
-        .from(Accounts)
-        .innerJoin(Emails, eq(Accounts.primaryEmailId, Emails.id))
-        .innerJoin(Sessions, eq(Sessions.accountId, Accounts.id))
-        .where(and(eq(Sessions.token, sessionToken), isNull(Sessions.applicationId)))
-        .then(first)
-    : null;
+    if (session) {
+      event.locals.oAuthSession = {
+        token: headerToken,
+        accountId: session.accountId,
+        applicationId: session.applicationId!,
+        scopes: session.scopes ?? [],
+      };
+    }
+  }
 
-  event.locals.session =
-    sessionToken && account
-      ? {
-          token: sessionToken,
-          account: {
-            id: account.id,
-            name: account.name,
-            primaryEmail: account.primaryEmail,
-            primaryEmailId: account.primaryEmailId,
-          },
-        }
-      : null;
+  const cookieToken = event.cookies.get('session');
+  if (cookieToken) {
+    const account = await db
+      .select({
+        id: Accounts.id,
+        name: Accounts.name,
+        primaryEmail: Emails.email,
+        primaryEmailId: Accounts.primaryEmailId,
+      })
+      .from(Accounts)
+      .innerJoin(Emails, eq(Accounts.primaryEmailId, Emails.id))
+      .innerJoin(Sessions, eq(Sessions.accountId, Accounts.id))
+      .where(and(eq(Sessions.token, cookieToken), isNull(Sessions.applicationId)))
+      .then(first);
+
+    if (account) {
+      event.locals.session = {
+        token: cookieToken,
+        account: {
+          id: account.id,
+          name: account.name,
+          primaryEmail: account.primaryEmail,
+          primaryEmailId: account.primaryEmailId,
+        },
+      };
+    }
+  }
 
   return resolve(event);
 };

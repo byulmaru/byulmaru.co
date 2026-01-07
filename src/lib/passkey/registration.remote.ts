@@ -97,7 +97,9 @@ export const verifyAndSavePasskey = command(
       key: verification.registrationInfo.credential.id,
       credential: {
         kind: 'PASSKEY',
-        publicKey: Buffer.from(verification.registrationInfo.credential.publicKey).toString('base64'),
+        publicKey: Buffer.from(verification.registrationInfo.credential.publicKey).toString(
+          'base64',
+        ),
         counter: verification.registrationInfo.credential.counter,
         transports: verification.registrationInfo.credential.transports,
       },

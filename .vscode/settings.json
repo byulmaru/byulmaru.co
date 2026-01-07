@@ -3,7 +3,7 @@
     "source.fixAll.eslint": "explicit",
     "source.formatDocument": "explicit"
   },
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.defaultFormatter": "prettier.prettier-vscode",
   "editor.formatOnSave": false,
   "eslint.enable": true,
   "eslint.format.enable": true,

@@ -1,19 +1,19 @@
 <script lang="ts">
   import { Separator } from '$lib/components/ui/separator';
-	import * as Sidebar from '$lib/components/ui/sidebar';
+  import * as Sidebar from '$lib/components/ui/sidebar';
   import AppSidebar from './AppSidebar.svelte';
 
-	const { children, data } = $props();
+  const { children, data } = $props();
 </script>
 
 <Sidebar.Provider>
-	<AppSidebar account={data.account} />
+  <AppSidebar account={data.account} />
   <Sidebar.Inset>
     <header class="flex h-16 shrink-0 items-center gap-2 border-b px-4">
       <Sidebar.Trigger />
       <Separator class="me-2 data-[orientation=vertical]:h-4" orientation="vertical" />
     </header>
-    <main class="w-full max-w-5xl mx-auto my-4 p-2">
+    <main class="mx-auto my-4 w-full max-w-5xl p-2">
       {@render children()}
     </main>
   </Sidebar.Inset>

@@ -39,16 +39,17 @@ export const actions = {
 
     const email = await getEmail(form.data.email);
 
-    const accountAuthenticators = email.accountId && !form.data.forceEmailVerification
-      ? await db
-          .select({
-            kind: AccountAuthenticators.kind,
-            key: AccountAuthenticators.key,
-            credential: AccountAuthenticators.credential,
-          })
-          .from(AccountAuthenticators)
-          .where(eq(AccountAuthenticators.accountId, email.accountId))
-      : [];
+    const accountAuthenticators =
+      email.accountId && !form.data.forceEmailVerification
+        ? await db
+            .select({
+              kind: AccountAuthenticators.kind,
+              key: AccountAuthenticators.key,
+              credential: AccountAuthenticators.credential,
+            })
+            .from(AccountAuthenticators)
+            .where(eq(AccountAuthenticators.accountId, email.accountId))
+        : [];
 
     if (accountAuthenticators.length === 0) {
       const verification = await sendEmailVerification(

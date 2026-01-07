@@ -1,19 +1,16 @@
+import { z } from 'zod';
+
 export const SUPPORTED_SCOPES = ['openid', 'profile', 'email'] as const;
-export type SupportedScope = (typeof SUPPORTED_SCOPES)[number];
+export const supportedScopeSchema = z.enum(SUPPORTED_SCOPES);
+export type SupportedScope = z.infer<typeof supportedScopeSchema>;
 
-export const parseScopes = (scopeString?: string): string[] => {
-  if (!scopeString) {return [];}
-  return scopeString.split(' ').filter((scope) => scope.length > 0);
-};
-
-export const isOIDCRequest = (scopes: string[]): boolean => {
+export const isOIDCRequest = (scopes: SupportedScope[]): boolean => {
   return scopes.includes('openid');
 };
 
-export const validateScopes = (requestedScopes: string[], supportedScopes: string[]): boolean => {
+export const validateScopes = (
+  requestedScopes: SupportedScope[],
+  supportedScopes: SupportedScope[],
+): boolean => {
   return requestedScopes.every((scope) => supportedScopes.includes(scope));
-};
-
-export const filterSupportedScopes = (requestedScopes: string[]): string[] => {
-  return requestedScopes.filter((scope) => (SUPPORTED_SCOPES as readonly string[]).includes(scope));
 };

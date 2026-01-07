@@ -9,7 +9,8 @@ export const firstOrThrow = <T>(arr: T[]): T => {
   return arr[0];
 };
 
-export const firstOrThrowWith = (errorMaker: () => Error) =>
+export const firstOrThrowWith =
+  (errorMaker: () => Error) =>
   <T>(arr: T[]): T => {
     if (arr.length === 0) {
       throw errorMaker();

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { superForm  } from 'sveltekit-superforms';
+  import { superForm } from 'sveltekit-superforms';
   import { Button } from '$lib/components/ui/button';
   import * as Dialog from '$lib/components/ui/dialog';
   import * as Field from '$lib/components/ui/field';
@@ -12,7 +12,7 @@
     form: SuperValidated<z.infer<typeof addEmailSchema>>;
     open: boolean;
     onSuccess: (email: { id: string; email: string }) => void;
-  }
+  };
 
   let { form: formProps, open = $bindable(false), onSuccess }: Props = $props();
   const { form, errors, enhance, submitting } = superForm(formProps, {
@@ -20,7 +20,7 @@
       if (result.type === 'success') {
         onSuccess(result.data.email);
       }
-    }
+    },
   });
 </script>
 
@@ -34,7 +34,7 @@
         <Field.Group>
           <Field.Field>
             <Field.Label for="email">이메일 주소</Field.Label>
-            <Input 
+            <Input
               id="email"
               name="email"
               aria-invalid={!!$errors.email}

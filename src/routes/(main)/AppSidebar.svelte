@@ -9,9 +9,9 @@
     account: {
       name: string;
       primaryEmail: string;
-    }
+    };
   };
-  
+
   const { account }: Props = $props();
   const isActive = (href: string) => page.url.pathname === href;
 </script>
@@ -26,31 +26,26 @@
       <Sidebar.GroupContent>
         <Sidebar.Menu>
           <Sidebar.MenuItem>
-            <Sidebar.MenuButton
-              isActive={isActive('/settings/profile')}
-            >
+            <Sidebar.MenuButton isActive={isActive('/settings/profile')}>
               {#snippet child({ props })}
-              <a href={resolve('/(main)/settings/profile')} {...props}>
-                <UserIcon/>
-                <span>프로필</span>
-              </a>
+                <a href={resolve('/(main)/settings/profile')} {...props}>
+                  <UserIcon />
+                  <span>프로필</span>
+                </a>
               {/snippet}
-              
             </Sidebar.MenuButton>
           </Sidebar.MenuItem>
           <Sidebar.MenuItem>
-            <Sidebar.MenuButton
-              isActive={isActive('/settings/email')}
-            >
+            <Sidebar.MenuButton isActive={isActive('/settings/email')}>
               {#snippet child({ props })}
-              <a href={resolve('/(main)/settings/email')} {...props}>
-                <MailIcon/>
-                <span>이메일</span>
-              </a>
+                <a href={resolve('/(main)/settings/email')} {...props}>
+                  <MailIcon />
+                  <span>이메일</span>
+                </a>
               {/snippet}
             </Sidebar.MenuButton>
           </Sidebar.MenuItem>
-          </Sidebar.Menu>
+        </Sidebar.Menu>
       </Sidebar.GroupContent>
     </Sidebar.Group>
     <Sidebar.Group>
@@ -69,19 +64,17 @@
               {/snippet}
             </Sidebar.MenuButton>
           </Sidebar.MenuItem> -->
-        <Sidebar.MenuItem>
-          <Sidebar.MenuButton
-            isActive={isActive('/passkey')}
-          >
-            {#snippet child({ props })}
-            <a href={resolve('/(main)/settings/passkey')} {...props}>
-              <KeyRoundIcon/>
-              <span>패스키</span>
-            </a>
-            {/snippet}
-          </Sidebar.MenuButton>
-        </Sidebar.MenuItem>
-        <!-- <Sidebar.MenuItem>
+          <Sidebar.MenuItem>
+            <Sidebar.MenuButton isActive={isActive('/passkey')}>
+              {#snippet child({ props })}
+                <a href={resolve('/(main)/settings/passkey')} {...props}>
+                  <KeyRoundIcon />
+                  <span>패스키</span>
+                </a>
+              {/snippet}
+            </Sidebar.MenuButton>
+          </Sidebar.MenuItem>
+          <!-- <Sidebar.MenuItem>
           <Sidebar.MenuButton
             isActive={isActive('/passkey')}
           >
@@ -105,7 +98,7 @@
             {/snippet}
           </Sidebar.MenuButton>
         </Sidebar.MenuItem> -->
-      </Sidebar.Menu>
+        </Sidebar.Menu>
       </Sidebar.GroupContent>
     </Sidebar.Group>
   </Sidebar.Content>

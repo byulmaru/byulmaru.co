@@ -3,10 +3,10 @@ import { and, eq, isNotNull, isNull, ne } from 'drizzle-orm';
 import { superValidate } from 'sveltekit-superforms';
 import { zod4 } from 'sveltekit-superforms/adapters';
 import { z } from 'zod';
+import { redirectToCookieIfExists } from '$lib/redirect';
 import { createSession } from '$lib/server/auth/createSession';
 import { Accounts, db, Emails, firstOrThrow, firstOrThrowWith } from '$lib/server/db';
 import { validationSchema } from '$lib/validation';
-import { OAuthAuthorizeSchema } from '../../oauth/authorize/schema';
 
 const schema = z.object({
   name: validationSchema.name,
@@ -44,7 +44,7 @@ export const load = async ({ cookies }) => {
 };
 
 export const actions = {
-  default: async ({ cookies, request, url }) => {
+  default: async ({ cookies, request }) => {
     const form = await superValidate(request, zod4(schema));
 
     if (!form.valid) {
@@ -99,27 +99,7 @@ export const actions = {
       });
     });
 
-    const oauthRedirectCookie = cookies.get('oauth_redirect_to');
-    if (oauthRedirectCookie) {
-      cookies.delete('oauth_redirect_to', {
-        path: '/',
-      });
-
-      try {
-        const oauthParams = OAuthAuthorizeSchema.parse(JSON.parse(oauthRedirectCookie));
-        const oauthUrl = new URL('/oauth/authorize', url.origin);
-        oauthUrl.searchParams.set('client_id', oauthParams.client_id);
-        oauthUrl.searchParams.set('redirect_uri', oauthParams.redirect_uri.toString());
-        oauthUrl.searchParams.set('response_type', oauthParams.response_type);
-        if (oauthParams.state) {
-          oauthUrl.searchParams.set('state', oauthParams.state);
-        }
-
-        return redirect(303, oauthUrl.toString());
-      } catch {
-        return redirect(303, '/');
-      }
-    }
+    redirectToCookieIfExists({ cookies });
 
     return redirect(303, '/');
   },

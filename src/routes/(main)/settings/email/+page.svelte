@@ -1,13 +1,27 @@
 <script lang="ts">
-  import { BadgeCheckIcon, BadgeXIcon, EllipsisIcon, MailPlusIcon, StarIcon, TrashIcon } from '@lucide/svelte';
-	import { Badge } from '$lib/components/ui/badge';
+  import {
+    BadgeCheckIcon,
+    BadgeXIcon,
+    EllipsisIcon,
+    MailPlusIcon,
+    StarIcon,
+    TrashIcon,
+  } from '@lucide/svelte';
+  import { Badge } from '$lib/components/ui/badge';
   import { Button } from '$lib/components/ui/button';
-	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
-	import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '$lib/components/ui/table';
+  import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
+  import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+  } from '$lib/components/ui/table';
   import AddEmailDialog from './AddEmailDialog.svelte';
   import VerifyEmailDialog from './VerifyEmailDialog.svelte';
 
-	const { data } = $props();
+  const { data } = $props();
 
   let addEmailDialogOpen = $state(false);
   let verifyEmailDialogOpen = $state(false);
@@ -18,14 +32,13 @@
     addEmailDialogOpen = false;
     verifyEmailDialogOpen = true;
   };
-
 </script>
 
 <div class="flex flex-col gap-6">
-	<Table>
+  <Table>
     <TableHeader>
       <TableRow>
-        <TableHead >이메일 목록</TableHead>
+        <TableHead>이메일 목록</TableHead>
       </TableRow>
     </TableHeader>
     <TableBody>
@@ -36,7 +49,7 @@
               <span class="font-medium">{email.email}</span>
               {#if email.isPrimary}
                 <Badge>
-                  <StarIcon/>
+                  <StarIcon />
                   <span>주 이메일</span>
                 </Badge>
               {/if}
@@ -56,7 +69,7 @@
               <DropdownMenu.Root>
                 <DropdownMenu.Trigger>
                   <Button class="rounded-full" size="icon" variant="ghost">
-                    <EllipsisIcon/>
+                    <EllipsisIcon />
                   </Button>
                 </DropdownMenu.Trigger>
                 <DropdownMenu.Content align="end">
@@ -64,8 +77,11 @@
                     {#if !email.isPrimary && email.verifiedAt}
                       <form action="?/setPrimary" method="post">
                         <DropdownMenu.Item>
-                          <button class="w-full text-left flex flex-row items-center gap-2" type="submit">
-                            <StarIcon/>
+                          <button
+                            class="flex w-full flex-row items-center gap-2 text-left"
+                            type="submit"
+                          >
+                            <StarIcon />
                             <span>주 이메일로 설정</span>
                           </button>
                         </DropdownMenu.Item>
@@ -73,21 +89,34 @@
                       </form>
                     {:else if !email.verifiedAt}
                       <DropdownMenu.Item>
-                        <button class="w-full text-left flex flex-row items-center gap-2" onclick={() => openVerifyEmailDialog(email)} type="button">
-                          <BadgeCheckIcon/>
+                        <button
+                          class="flex w-full flex-row items-center gap-2 text-left"
+                          onclick={() => openVerifyEmailDialog(email)}
+                          type="button"
+                        >
+                          <BadgeCheckIcon />
                           <span>인증하기</span>
                         </button>
                       </DropdownMenu.Item>
                     {/if}
                     <form action="?/deleteEmail" method="post">
                       <input name="emailId" type="hidden" value={email.id} />
-                      <DropdownMenu.Item class="flex flex-col" disabled={email.isPrimary} variant="destructive">
-                        <button class="w-full text-left flex flex-row items-center gap-2" type="submit">
-                          <TrashIcon/>
+                      <DropdownMenu.Item
+                        class="flex flex-col"
+                        disabled={email.isPrimary}
+                        variant="destructive"
+                      >
+                        <button
+                          class="flex w-full flex-row items-center gap-2 text-left"
+                          type="submit"
+                        >
+                          <TrashIcon />
                           <span>삭제</span>
                         </button>
                         {#if email.isPrimary}
-                          <span class="text-xs text-muted-foreground">주 이메일은 삭제할 수 없어요</span>
+                          <span class="text-muted-foreground text-xs"
+                            >주 이메일은 삭제할 수 없어요</span
+                          >
                         {/if}
                       </DropdownMenu.Item>
                     </form>
@@ -101,11 +130,19 @@
     </TableBody>
   </Table>
 
-	<!-- 새 이메일 추가 -->
-	<Button onclick={() => addEmailDialogOpen = true}>
-    <MailPlusIcon/>
+  <!-- 새 이메일 추가 -->
+  <Button onclick={() => (addEmailDialogOpen = true)}>
+    <MailPlusIcon />
     <span>새 이메일 추가</span>
   </Button>
-  <AddEmailDialog form={data.addEmailForm} onSuccess={openVerifyEmailDialog} bind:open={addEmailDialogOpen} />
-  <VerifyEmailDialog email={verifyEmail} form={data.verifyEmailForm} bind:open={verifyEmailDialogOpen} />
+  <AddEmailDialog
+    form={data.addEmailForm}
+    onSuccess={openVerifyEmailDialog}
+    bind:open={addEmailDialogOpen}
+  />
+  <VerifyEmailDialog
+    email={verifyEmail}
+    form={data.verifyEmailForm}
+    bind:open={verifyEmailDialogOpen}
+  />
 </div>

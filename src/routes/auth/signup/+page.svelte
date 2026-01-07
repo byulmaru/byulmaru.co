@@ -15,8 +15,8 @@
 <div class="flex min-h-screen items-center justify-center bg-gray-50">
   <Card class="w-full max-w-md">
     <CardHeader>
-      <CardTitle class="text-2xl text-center">회원가입</CardTitle>
-      <p class="mt-2 text-sm text-gray-500 text-center">
+      <CardTitle class="text-center text-2xl">회원가입</CardTitle>
+      <p class="mt-2 text-center text-sm text-gray-500">
         {data.email.email}로 가입을 진행합니다
       </p>
     </CardHeader>
@@ -38,7 +38,7 @@
 
         <div class="space-y-3">
           <h3 class="text-sm font-medium text-gray-700">약관 동의</h3>
-          
+
           <div class="space-y-2">
             <label class="flex items-start gap-2">
               <input
@@ -49,7 +49,11 @@
               />
               <span class="text-sm text-gray-700">
                 <span class="text-red-500">*</span>
-                <a class="text-primary hover:underline" href={resolve('/(docs)/terms')} target="_blank">
+                <a
+                  class="text-primary hover:underline"
+                  href={resolve('/(docs)/terms')}
+                  target="_blank"
+                >
                   서비스 이용약관
                 </a>에 동의합니다
               </span>
@@ -64,7 +68,11 @@
               />
               <span class="text-sm text-gray-700">
                 <span class="text-red-500">*</span>
-                <a class="text-primary hover:underline" href={resolve('/(docs)/privacy')} target="_blank">
+                <a
+                  class="text-primary hover:underline"
+                  href={resolve('/(docs)/privacy')}
+                  target="_blank"
+                >
                   개인정보 처리방침
                 </a>에 동의합니다
               </span>
@@ -73,7 +81,7 @@
         </div>
 
         <!-- 전체 동의 -->
-        <label class="flex items-center gap-2 pt-2 border-t">
+        <label class="flex items-center gap-2 border-t pt-2">
           <input
             class="h-4 w-4"
             checked={$form.termsAgreed && $form.privacyAgreed}
@@ -84,16 +92,14 @@
             }}
             type="checkbox"
           />
-          <span class="text-sm font-medium text-gray-700">
-            모든 약관에 동의합니다
-          </span>
+          <span class="text-sm font-medium text-gray-700"> 모든 약관에 동의합니다 </span>
         </label>
 
         <input name="emailId" type="hidden" value={data.email.id} />
 
-        <Button 
-          class="w-full mt-4" 
-          aria-busy={$submitting} 
+        <Button
+          class="mt-4 w-full"
+          aria-busy={$submitting}
           disabled={!$form.name || !$form.termsAgreed || !$form.privacyAgreed}
           type="submit"
         >
@@ -102,4 +108,4 @@
       </form>
     </CardContent>
   </Card>
-</div> 
+</div>

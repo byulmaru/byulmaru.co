@@ -18,7 +18,7 @@
       <Field.Group>
         <Field.Field>
           <Field.Label for="name">닉네임</Field.Label>
-          <Input 
+          <Input
             id="name"
             name="name"
             aria-invalid={!!$errors.name}
@@ -39,4 +39,3 @@
     </Field.Field>
   </Field.Group>
 </form>
-

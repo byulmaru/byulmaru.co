@@ -13,7 +13,7 @@ import {
   OAuthApplications,
   OAuthApplicationSecrets,
   OAuthApplicationTokens,
-  OAuthSessions,
+  Sessions,
 } from '$lib/server/db';
 import { createIdToken } from '$lib/server/oidc/jwt';
 import { isOIDCRequest } from '$lib/server/oidc/scopes';
@@ -88,7 +88,7 @@ export const POST = async ({ request }) => {
   }
 
   const session = await db
-    .insert(OAuthSessions)
+    .insert(Sessions)
     .values({
       applicationId: applicationToken.applicationId,
       accountId: applicationToken.accountId,
@@ -96,7 +96,7 @@ export const POST = async ({ request }) => {
       token: crypto.randomUUID(),
     })
     .returning({
-      token: OAuthSessions.token,
+      token: Sessions.token,
     })
     .then(firstOrThrow);
 

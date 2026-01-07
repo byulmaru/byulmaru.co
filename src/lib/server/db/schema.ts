@@ -4,6 +4,7 @@ import { ulid } from 'ulidx';
 import { datetime } from './types';
 import type { AnyPgColumn } from 'drizzle-orm/pg-core';
 import type { PasskeyAccountAuthenticatorCredential } from '$lib/passkey/types';
+import type { SupportedScope } from '$lib/server/oidc/scopes';
 
 export const AccountState = pgEnum('_account_state', ['ACTIVE', 'DELETED']);
 export const Accounts = pgTable('accounts', {
@@ -105,10 +106,7 @@ export const OAuthApplications = pgTable('oauth_applications', {
     .primaryKey()
     .$defaultFn(() => ulid()),
   name: varchar('name').notNull(),
-  scopes: varchar('scopes')
-    .array()
-    .notNull()
-    .default(sql`'{}'`),
+  scopes: jsonb('scopes').notNull().$type<SupportedScope[]>(),
   isSuperApp: boolean('is_super_app').notNull().default(false),
   createdAt: datetime('created_at'),
 });
@@ -153,29 +151,12 @@ export const OAuthApplicationTokens = pgTable('oauth_application_tokens', {
     .notNull()
     .references(() => OAuthApplicationRedirectUris.id),
   token: varchar('token').notNull(),
-  scopes: varchar('scopes').array().notNull(),
+  scopes: jsonb('scopes').notNull().$type<SupportedScope[]>(),
   nonce: varchar('nonce'),
   createdAt: datetime('created_at')
     .notNull()
     .default(sql`now()`),
   expiresAt: datetime('expires_at').notNull(),
-});
-
-export const OAuthSessions = pgTable('oauth_sessions', {
-  id: varchar('id')
-    .primaryKey()
-    .$defaultFn(() => ulid()),
-  applicationId: varchar('application_id')
-    .notNull()
-    .references(() => OAuthApplications.id),
-  accountId: varchar('account_id')
-    .notNull()
-    .references(() => Accounts.id),
-  token: varchar('token').notNull(),
-  scopes: varchar('scopes').array().notNull(),
-  createdAt: datetime('created_at')
-    .notNull()
-    .default(sql`now()`),
 });
 
 export const Sessions = pgTable('sessions', {
@@ -187,10 +168,7 @@ export const Sessions = pgTable('sessions', {
     .notNull()
     .references(() => Accounts.id),
   token: varchar('token').unique().notNull(),
-  scopes: varchar('scopes')
-    .array()
-    .notNull()
-    .default(sql`'{}'`),
+  scopes: jsonb('scopes').$type<SupportedScope[]>(),
   createdAt: datetime('created_at')
     .notNull()
     .default(sql`now()`),

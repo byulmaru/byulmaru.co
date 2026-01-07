@@ -1,13 +1,7 @@
 import { json } from '@sveltejs/kit';
 import { and, eq } from 'drizzle-orm';
 import { z } from 'zod';
-import {
-  db,
-  first,
-  OAuthApplications,
-  OAuthApplicationSecrets,
-  OAuthSessions,
-} from '$lib/server/db';
+import { db, first, OAuthApplications, OAuthApplicationSecrets, Sessions } from '$lib/server/db';
 
 const schema = z.object({
   client_id: z.string(),
@@ -39,11 +33,11 @@ export const POST = async ({ request }) => {
 
   const session = await db
     .select({
-      id: OAuthSessions.id,
-      applicationId: OAuthSessions.applicationId,
+      id: Sessions.id,
+      applicationId: Sessions.applicationId,
     })
-    .from(OAuthSessions)
-    .where(eq(OAuthSessions.token, token))
+    .from(Sessions)
+    .where(eq(Sessions.token, token))
     .then(first);
 
   if (session) {
@@ -51,7 +45,7 @@ export const POST = async ({ request }) => {
       return json({ error: 'invalid_grant' }, { status: 400 });
     }
 
-    await db.delete(OAuthSessions).where(eq(OAuthSessions.id, session.id));
+    await db.delete(Sessions).where(eq(Sessions.id, session.id));
   }
 
   return json({});

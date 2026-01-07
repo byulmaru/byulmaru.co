@@ -2,6 +2,7 @@ import { error, redirect } from '@sveltejs/kit';
 import { and, eq } from 'drizzle-orm';
 import { Temporal } from 'temporal-polyfill';
 import { z } from 'zod';
+import { setRedirectCookie } from '$lib/redirect';
 import {
   db,
   firstOrThrow,
@@ -10,16 +11,24 @@ import {
   OAuthApplications,
   OAuthApplicationTokens,
 } from '$lib/server/db';
-import { filterSupportedScopes, parseScopes, validateScopes } from '$lib/server/oidc/scopes';
-import { getSession } from '$lib/server/session';
-import { OAuthAuthorizeSchema } from './schema';
+import { supportedScopeSchema, validateScopes } from '$lib/server/oidc/scopes';
+import { uriToRedirectUrl } from '$lib/url';
 
-export const GET = async ({ cookies, url }) => {
+const OAuthAuthorizeSchema = z.object({
+  response_type: z.enum(['code']),
+  client_id: z.string(),
+  redirect_uri: z.url().transform(uriToRedirectUrl),
+  scope: z.preprocess(
+    (val) => (typeof val === 'string' ? val.split(' ') : val),
+    z.array(supportedScopeSchema).default([]),
+  ),
+  state: z.string().max(4096).optional(),
+});
+
+export const GET = async ({ cookies, url, locals }) => {
   const { client_id, redirect_uri, state, scope } = OAuthAuthorizeSchema.parse(
     Object.fromEntries(url.searchParams),
   );
-
-  const requestedScopes = parseScopes(scope);
 
   const application = await db
     .select({
@@ -42,24 +51,23 @@ export const GET = async ({ cookies, url }) => {
     throw error(400, { message: 'invalid_redirect_uri' });
   }
 
-  const scopes = filterSupportedScopes(requestedScopes);
-  if (!validateScopes(scopes, application.scopes)) {
+  if (!validateScopes(scope, application.scopes)) {
     throw error(400, { message: 'invalid_scope' });
   }
 
-  const session = await getSession(db, cookies.get('session'));
-  if (session) {
+  if (locals.session) {
+    const session = locals.session;
     return redirect(
       303,
       await db.transaction(async (tx) => {
         const token = await tx
           .insert(OAuthApplicationTokens)
           .values({
-            accountId: session.accountId,
+            accountId: session.account.id,
             applicationId: application.id,
             redirectUriId: application.redirectUriId!,
             token: crypto.randomUUID(),
-            scopes,
+            scopes: scope,
             expiresAt: Temporal.Now.instant().add({ minutes: 5 }),
           })
           .returning({
@@ -76,21 +84,16 @@ export const GET = async ({ cookies, url }) => {
       }),
     );
   } else {
-    cookies.set(
-      'oauth_redirect_to',
-      JSON.stringify({
-        client_id,
-        redirect_uri: redirect_uri.toString(),
-        response_type: 'code',
+    setRedirectCookie({
+      cookies,
+      target: {
+        kind: 'OAUTH_AUTHORIZE',
+        clientId: client_id,
+        redirectUri: redirect_uri.toString(),
         state,
         scope,
-      } satisfies z.input<typeof OAuthAuthorizeSchema>),
-      {
-        path: '/',
-        httpOnly: true,
-        sameSite: 'lax',
       },
-    );
+    });
 
     return redirect(303, '/auth');
   }

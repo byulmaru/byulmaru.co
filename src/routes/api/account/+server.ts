@@ -2,12 +2,9 @@ import { json } from '@sveltejs/kit';
 import { eq } from 'drizzle-orm';
 import { db, firstOrThrow } from '$lib/server/db';
 import { Accounts, Emails } from '$lib/server/db/schema';
-import { getOAuthSession } from '$lib/server/session';
 
-export const GET = async ({ request }) => {
-  const token = request.headers.get('Authorization')?.match(/^Bearer\s+(.*)$/)?.[1] ?? null;
-  const session = await getOAuthSession(db, token);
-  if (!session) {
+export const GET = async ({ locals }) => {
+  if (!locals.oAuthSession) {
     return json({ error: 'invalid_token' }, { status: 401 });
   }
 
@@ -19,10 +16,10 @@ export const GET = async ({ request }) => {
     })
     .from(Accounts)
     .innerJoin(Emails, eq(Accounts.primaryEmailId, Emails.id))
-    .where(eq(Accounts.id, session.accountId))
+    .where(eq(Accounts.id, locals.oAuthSession.accountId))
     .then(firstOrThrow);
 
-  const scopes = session.scopes || [];
+  const scopes = locals.oAuthSession.scopes || [];
 
   // scope에 따라 응답할 claims 결정
   const userInfo: Record<string, unknown> = {

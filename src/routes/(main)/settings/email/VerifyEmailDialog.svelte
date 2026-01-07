@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { superForm  } from 'sveltekit-superforms';
+  import { superForm } from 'sveltekit-superforms';
   import { Button } from '$lib/components/ui/button';
   import * as Dialog from '$lib/components/ui/dialog';
   import * as InputOTP from '$lib/components/ui/input-otp';
@@ -11,7 +11,7 @@
     form: SuperValidated<z.infer<typeof verifyEmailSchema>>;
     open: boolean;
     email: { id: string; email: string } | null;
-  }
+  };
 
   let { form: formProps, open = $bindable(false), email }: Props = $props();
   const { form, errors, enhance, submitting } = superForm(formProps, {
@@ -19,7 +19,7 @@
       if (result.type === 'success') {
         open = false;
       }
-    }
+    },
   });
 </script>
 
@@ -33,7 +33,7 @@
         </Dialog.Description>
       </Dialog.Header>
       <input name="emailId" type="hidden" value={email?.id} />
-      <div class="flex justify-center items-center py-8">
+      <div class="flex items-center justify-center py-8">
         <InputOTP.Root name="code" maxlength={6} bind:value={$form.code}>
           {#snippet children({ cells })}
             <InputOTP.Group>
