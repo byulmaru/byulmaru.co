@@ -11,7 +11,7 @@ export const init = async () => {
       { category: ['drizzle-orm'], sinks: ['console'], lowestLevel: 'debug' },
       { category: ['server'], sinks: ['console'], lowestLevel: 'debug' },
     ],
-  });
+  }).catch(() => null);
 };
 
 export const handle = async ({ event, resolve }) => {

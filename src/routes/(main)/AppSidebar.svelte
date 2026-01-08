@@ -101,6 +101,23 @@
         </Sidebar.Menu>
       </Sidebar.GroupContent>
     </Sidebar.Group>
+    <Sidebar.Group>
+      <Sidebar.GroupLabel>외부 계정 설정</Sidebar.GroupLabel>
+      <Sidebar.GroupContent>
+        <Sidebar.Menu>
+          <Sidebar.MenuItem>
+            <Sidebar.MenuButton isActive={isActive('/discord')}>
+              {#snippet child({ props })}
+                <a href={resolve('/(main)/settings/discord')} {...props}>
+                  <iconify-icon icon="fa7-brands:discord"></iconify-icon>
+                  <span>디스코드</span>
+                </a>
+              {/snippet}
+            </Sidebar.MenuButton>
+          </Sidebar.MenuItem>
+        </Sidebar.Menu>
+      </Sidebar.GroupContent>
+    </Sidebar.Group>
   </Sidebar.Content>
   <Sidebar.Rail />
 </Sidebar.Root>

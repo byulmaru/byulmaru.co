@@ -101,6 +101,25 @@ export const EmailVerifications = pgTable('email_verifications', {
     .default(sql`now()`),
 });
 
+export const ExternalAccountKind = pgEnum('_external_account_kind', ['DISCORD']);
+export const ExternalAccounts = pgTable('external_accounts', {
+  id: varchar('id')
+    .primaryKey()
+    .$defaultFn(() => ulid()),
+  accountId: varchar('account_id')
+    .notNull()
+    .references(() => Accounts.id),
+  kind: ExternalAccountKind('kind').notNull(),
+  externalId: varchar('external_id').notNull(),
+  data: jsonb('data').$type<{ username: string, avatarHash: string | null }>(),
+  createdAt: datetime('created_at')
+    .notNull()
+    .default(sql`now()`),
+}, (t) => [
+  unique().on(t.accountId, t.kind),
+  unique().on(t.kind, t.externalId),
+]);
+
 export const OAuthApplications = pgTable('oauth_applications', {
   id: varchar('id')
     .primaryKey()
