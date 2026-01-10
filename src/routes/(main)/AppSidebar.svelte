@@ -9,7 +9,7 @@
     account: {
       name: string;
       primaryEmail: string;
-    };
+    } | undefined;
   };
 
   const { account }: Props = $props();
@@ -18,7 +18,17 @@
 
 <Sidebar.Root>
   <Sidebar.Header>
-    <NavAccount {account} />
+    <Sidebar.Menu>
+        <Sidebar.MenuItem>
+          <Sidebar.MenuButton>
+            {#snippet child({ props })}
+              <a href={resolve('/')} {...props}>
+                <span class="font-bold">별마루동인협동조합(가칭)</span>
+              </a>
+            {/snippet}
+          </Sidebar.MenuButton>
+        </Sidebar.MenuItem>
+      </Sidebar.Menu>
   </Sidebar.Header>
   <Sidebar.Content>
     <Sidebar.Group>
@@ -119,5 +129,22 @@
       </Sidebar.GroupContent>
     </Sidebar.Group>
   </Sidebar.Content>
+  <Sidebar.Footer>
+    {#if account}
+      <NavAccount {account} />
+    {:else}
+      <Sidebar.Menu>
+        <Sidebar.MenuItem>
+          <Sidebar.MenuButton>
+            {#snippet child({ props })}
+              <a href={resolve('/auth')} {...props}>
+                <span>로그인</span>
+              </a>
+            {/snippet}
+          </Sidebar.MenuButton>
+        </Sidebar.MenuItem>
+      </Sidebar.Menu>
+    {/if}
+  </Sidebar.Footer>
   <Sidebar.Rail />
 </Sidebar.Root>

@@ -16,6 +16,6 @@ export const actions = {
       });
     }
 
-    throw redirect(303, '/auth');
+    throw redirect(303, '/');
   },
 };

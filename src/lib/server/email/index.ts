@@ -21,7 +21,7 @@ type SendEmailParams = {
 
 export const sendEmail = async ({ subject, recipient, body }: SendEmailParams) => {
   const email = createMessage({
-    from: 'Byulmaru ID <noreply@byulmaru.co>',
+    from: 'Byulmaru <noreply@byulmaru.co>',
     to: recipient,
     subject,
     content: { html: await render(body) },

@@ -46,9 +46,9 @@ export const sendEmailVerification = async (
 
     await sendEmail({
       subject: match(purpose)
-        .with('LOGIN', () => '별마루 통합 계정 로그인하기')
-        .with('SIGN_UP', () => '별마루 통합 계정 가입하기')
-        .with('ADD_EMAIL', () => '별마루 통합 계정 이메일 추가 인증')
+        .with('LOGIN', () => '별마루 계정 로그인하기')
+        .with('SIGN_UP', () => '별마루 계정 가입하기')
+        .with('ADD_EMAIL', () => '별마루 계정 이메일 추가 인증')
         .exhaustive(),
       recipient: email.email,
       body: match(purpose)

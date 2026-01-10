@@ -6,16 +6,16 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - id.byulmaru.co
+        - byulmaru.co
       secretName: certificate
   rules:
-    - host: id.byulmaru.co
+    - host: byulmaru.co
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: id
+                name: byulmaru-co
                 port:
                   number: 8080

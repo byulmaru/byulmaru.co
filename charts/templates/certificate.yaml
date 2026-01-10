@@ -8,4 +8,4 @@ spec:
     name: cert-issuer
     kind: ClusterIssuer
   dnsNames:
-    - id.byulmaru.co
+    - byulmaru.co

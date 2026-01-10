@@ -94,7 +94,7 @@
         {#if page.state.phase === 'SELECT_METHOD'}
           다른 방법으로 로그인
         {:else}
-          별마루 통합 ID
+          별마루 ID 로그인
         {/if}
       </CardTitle>
     </CardHeader>

@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: identity
+  name: byulmaru-co
   namespace: argocd
 spec:
   project: byulmaru
   source:
-    repoURL: https://github.com/byulmaru/id.git
+    repoURL: https://github.com/byulmaru/byulmaru.co.git
     targetRevision: HEAD
     path: charts
   destination:
     server: https://kubernetes.default.svc
-    namespace: identity
+    namespace: byulmaru-co
   syncPolicy:
     automated:
       prune: true
