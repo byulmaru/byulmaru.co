@@ -1,5 +1,5 @@
 {
-  "id": "35384c85-75e2-4239-a95e-6238f791bf3c",
+  "id": "25853b19-561f-477c-8345-1430e6040e1e",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -59,8 +59,12 @@
           "name": "account_authenticators_account_id_accounts_id_fk",
           "tableFrom": "account_authenticators",
           "tableTo": "accounts",
-          "columnsFrom": ["account_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "account_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -70,7 +74,10 @@
         "account_authenticators_account_id_key_unique": {
           "name": "account_authenticators_account_id_key_unique",
           "nullsNotDistinct": true,
-          "columns": ["account_id", "key"]
+          "columns": [
+            "account_id",
+            "key"
+          ]
         }
       },
       "policies": {},
@@ -121,8 +128,12 @@
           "name": "accounts_primary_email_id_emails_id_fk",
           "tableFrom": "accounts",
           "tableTo": "emails",
-          "columnsFrom": ["primary_email_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "primary_email_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -176,7 +187,9 @@
         "challenges_device_id_unique": {
           "name": "challenges_device_id_unique",
           "nullsNotDistinct": false,
-          "columns": ["device_id"]
+          "columns": [
+            "device_id"
+          ]
         }
       },
       "policies": {},
@@ -232,8 +245,12 @@
           "name": "email_verifications_email_id_emails_id_fk",
           "tableFrom": "email_verifications",
           "tableTo": "emails",
-          "columnsFrom": ["email_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "email_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -243,7 +260,9 @@
         "email_verifications_email_id_unique": {
           "name": "email_verifications_email_id_unique",
           "nullsNotDistinct": false,
-          "columns": ["email_id"]
+          "columns": [
+            "email_id"
+          ]
         }
       },
       "policies": {},
@@ -336,14 +355,100 @@
           "name": "emails_account_id_accounts_id_fk",
           "tableFrom": "emails",
           "tableTo": "accounts",
-          "columnsFrom": ["account_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "account_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.external_accounts": {
+      "name": "external_accounts",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "account_id": {
+          "name": "account_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "kind": {
+          "name": "kind",
+          "type": "_external_account_kind",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "external_id": {
+          "name": "external_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "data": {
+          "name": "data",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "external_accounts_account_id_accounts_id_fk": {
+          "name": "external_accounts_account_id_accounts_id_fk",
+          "tableFrom": "external_accounts",
+          "tableTo": "accounts",
+          "columnsFrom": [
+            "account_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "external_accounts_account_id_kind_unique": {
+          "name": "external_accounts_account_id_kind_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "account_id",
+            "kind"
+          ]
+        },
+        "external_accounts_kind_external_id_unique": {
+          "name": "external_accounts_kind_external_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "kind",
+            "external_id"
+          ]
+        }
+      },
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false
@@ -384,8 +489,12 @@
           "name": "oauth_application_redirect_uris_application_id_oauth_applications_id_fk",
           "tableFrom": "oauth_application_redirect_uris",
           "tableTo": "oauth_applications",
-          "columnsFrom": ["application_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "application_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -432,8 +541,12 @@
           "name": "oauth_application_secrets_application_id_oauth_applications_id_fk",
           "tableFrom": "oauth_application_secrets",
           "tableTo": "oauth_applications",
-          "columnsFrom": ["application_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "application_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -480,7 +593,7 @@
         },
         "scopes": {
           "name": "scopes",
-          "type": "varchar[]",
+          "type": "jsonb",
           "primaryKey": false,
           "notNull": true
         },
@@ -510,8 +623,12 @@
           "name": "oauth_application_tokens_application_id_oauth_applications_id_fk",
           "tableFrom": "oauth_application_tokens",
           "tableTo": "oauth_applications",
-          "columnsFrom": ["application_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "application_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -519,8 +636,12 @@
           "name": "oauth_application_tokens_account_id_accounts_id_fk",
           "tableFrom": "oauth_application_tokens",
           "tableTo": "accounts",
-          "columnsFrom": ["account_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "account_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -528,8 +649,12 @@
           "name": "oauth_application_tokens_redirect_uri_id_oauth_application_redirect_uris_id_fk",
           "tableFrom": "oauth_application_tokens",
           "tableTo": "oauth_application_redirect_uris",
-          "columnsFrom": ["redirect_uri_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "redirect_uri_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -558,10 +683,9 @@
         },
         "scopes": {
           "name": "scopes",
-          "type": "varchar[]",
+          "type": "jsonb",
           "primaryKey": false,
-          "notNull": true,
-          "default": "'{}'"
+          "notNull": true
         },
         "is_super_app": {
           "name": "is_super_app",
@@ -579,75 +703,6 @@
       },
       "indexes": {},
       "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.oauth_sessions": {
-      "name": "oauth_sessions",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "varchar",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "application_id": {
-          "name": "application_id",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "account_id": {
-          "name": "account_id",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "token": {
-          "name": "token",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "scopes": {
-          "name": "scopes",
-          "type": "varchar[]",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "oauth_sessions_application_id_oauth_applications_id_fk": {
-          "name": "oauth_sessions_application_id_oauth_applications_id_fk",
-          "tableFrom": "oauth_sessions",
-          "tableTo": "oauth_applications",
-          "columnsFrom": ["application_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "oauth_sessions_account_id_accounts_id_fk": {
-          "name": "oauth_sessions_account_id_accounts_id_fk",
-          "tableFrom": "oauth_sessions",
-          "tableTo": "accounts",
-          "columnsFrom": ["account_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},
@@ -684,10 +739,9 @@
         },
         "scopes": {
           "name": "scopes",
-          "type": "varchar[]",
+          "type": "jsonb",
           "primaryKey": false,
-          "notNull": true,
-          "default": "'{}'"
+          "notNull": false
         },
         "created_at": {
           "name": "created_at",
@@ -703,8 +757,12 @@
           "name": "sessions_application_id_oauth_applications_id_fk",
           "tableFrom": "sessions",
           "tableTo": "oauth_applications",
-          "columnsFrom": ["application_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "application_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -712,8 +770,12 @@
           "name": "sessions_account_id_accounts_id_fk",
           "tableFrom": "sessions",
           "tableTo": "accounts",
-          "columnsFrom": ["account_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "account_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -723,7 +785,9 @@
         "sessions_token_unique": {
           "name": "sessions_token_unique",
           "nullsNotDistinct": false,
-          "columns": ["token"]
+          "columns": [
+            "token"
+          ]
         }
       },
       "policies": {},
@@ -735,17 +799,34 @@
     "public._account_authenticator_kind": {
       "name": "_account_authenticator_kind",
       "schema": "public",
-      "values": ["PASSWORD", "PASSKEY"]
+      "values": [
+        "PASSWORD",
+        "PASSKEY"
+      ]
     },
     "public._account_state": {
       "name": "_account_state",
       "schema": "public",
-      "values": ["ACTIVE", "DELETED"]
+      "values": [
+        "ACTIVE",
+        "DELETED"
+      ]
     },
     "public._email_verification_purpose": {
       "name": "_email_verification_purpose",
       "schema": "public",
-      "values": ["LOGIN", "SIGN_UP", "ADD_EMAIL"]
+      "values": [
+        "LOGIN",
+        "SIGN_UP",
+        "ADD_EMAIL"
+      ]
+    },
+    "public._external_account_kind": {
+      "name": "_external_account_kind",
+      "schema": "public",
+      "values": [
+        "DISCORD"
+      ]
     }
   },
   "schemas": {},
