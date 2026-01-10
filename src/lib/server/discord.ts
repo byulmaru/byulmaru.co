@@ -6,5 +6,3 @@ export const discordClient = new Client({
 });
 
 export const getDiscordMember = async (userId: string) => discordClient.guilds.fetch(env.DISCORD_GUILD_ID).then((guild) => guild.members.fetch(userId));
-
-discordClient.login(env.DISCORD_BOT_TOKEN);

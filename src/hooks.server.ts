@@ -3,6 +3,8 @@ import { and, eq, isNotNull, isNull } from 'drizzle-orm';
 import { env as publicEnv } from '$env/dynamic/public';
 import { Accounts, db, Emails, first, Sessions } from '$lib/server/db';
 import { randomId } from '$lib/server/id';
+import { discordClient } from '$lib/server/discord';
+import { env } from '$env/dynamic/private';
 
 export const init = async () => {
   await configure({
@@ -12,6 +14,8 @@ export const init = async () => {
       { category: ['server'], sinks: ['console'], lowestLevel: 'debug' },
     ],
   }).catch(() => null);
+
+  discordClient.login(env.DISCORD_BOT_TOKEN);
 };
 
 export const handle = async ({ event, resolve }) => {
