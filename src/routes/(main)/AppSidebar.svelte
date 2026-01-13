@@ -42,7 +42,7 @@
       <Sidebar.MenuItem>
         <Sidebar.MenuButton>
           {#snippet child({ props })}
-            <a href={resolve('/')} {...props}>
+            <a href={resolve('/(main)/notice')} {...props}>
               <MegaphoneIcon />
               <span>공고</span>
             </a>
