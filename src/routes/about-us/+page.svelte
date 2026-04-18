@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Divider from '$lib/components/Divider.svelte';
   import avatarHyeju from '$lib/assets/avatar-hyeju.jpg';
   import avatarJiyu from '$lib/assets/avatar-jiyu.png';
   import avatarYeeun from '$lib/assets/avatar-yeeun.png';
@@ -22,9 +23,8 @@
       nickname: '샤샤',
       highlights: [
         '사이버보안전공 (2021.03~)',
-        '4년차 빛의 전사',
-        'FF14 공대장 3년차 (5절클자)',
-        'FF14 하드컨텐츠 공략 시트 & 시점 제작 (북미식 / 절에덴, 크루저급)',
+        '4년차 빛의 전사 (5절클)',
+        'Stargazing for 18+ months...'
       ],
     },
     {
@@ -41,54 +41,82 @@
   <title>About us</title>
 </svelte:head>
 
-<section class="px-5 pb-20 pt-8 sm:px-8 sm:pb-24 lg:px-12 lg:pt-12">
-  <div class="mx-auto flex w-full max-w-6xl flex-col gap-14 sm:gap-18 lg:gap-24">
-    <header class="flex flex-col items-center gap-8 text-center sm:gap-10">
-      <h1
-        class="max-w-5xl text-balance text-[clamp(2.4rem,7vw,5.5rem)] font-black leading-[0.95] tracking-[-0.04em] text-black"
-      >
-        <p>당사자의 시선으로</p>
-        <p>생태계를 만듭니다.</p>
-      </h1>
+<section class="mx-auto w-full max-w-[1280px] px-5 pb-20 pt-0 sm:px-8 lg:px-12 lg:pb-24">
+  <section class="px-4 py-14 sm:px-8 sm:py-20 lg:px-0 lg:py-[7.5rem]">
+    <div class="mx-auto flex w-full max-w-[1280px] flex-col gap-10 lg:gap-[3.5rem]">
+      <header class="flex flex-col items-center gap-8 text-center lg:gap-10">
+        <h1
+          class="max-w-[1120px] text-balance font-['Noto_Sans_KR',sans-serif] text-[clamp(2.7rem,6vw,5.6rem)] font-bold leading-[0.96] tracking-[-0.05em] text-[#19192b]"
+        >
+          <span class="block">당사자의 시선으로</span>
+          <span class="block">생태계를 만듭니다.</span>
+        </h1>
+
+        <div
+          class="max-w-[72rem] text-pretty px-2 font-['Noto_Sans_KR',sans-serif] text-[1rem] leading-[1.9] tracking-[-0.015em] text-[#f4f1ff]/86 sm:text-[1.125rem] lg:text-[1.375rem]"
+        >
+          <p>별마루는 동인 창작 문화의 당사자들이 모여 만든 팀입니다.</p>
+        </div>
+      </header>
+    </div>
+  </section>
+
+  <Divider />
+
+  <section class="px-4 py-12 sm:px-8 lg:px-0 lg:py-[3.625rem]">
+    <div class="mx-auto flex w-full max-w-[1280px] flex-col gap-8 lg:gap-9">
+      
 
       <div
-        class="max-w-3xl space-y-2 text-pretty text-base leading-7 text-white/80 sm:text-xl sm:leading-9"
+        class="rounded-[2rem] sm:px-5 sm:py-5 lg:px-4 lg:py-3"
       >
-        <p>별마루는 동인 창작 문화의 당사자들이 모여 만든 팀입니다.</p>
-      </div>
-    </header>
-
-    <section aria-label="Team layout preview" class="grid gap-5 lg:grid-cols-3 xl:gap-6">
-      {#each profileCards as card (card.name)}
-        <article
-          class="rounded-[2rem] border border-white/25 bg-white/[0.03] px-6 py-8 shadow-[0_18px_60px_rgba(20,20,40,0.18)] backdrop-blur-[2px] sm:px-8 sm:py-10"
-        >
-          <div class="flex flex-col items-center text-center">
-            <div
-              class="mb-6 h-36 w-36 overflow-hidden rounded-full shadow-[0_16px_24px_rgba(25,25,45,0.22)] sm:h-40 sm:w-40"
+        <section aria-label="Team members" class="grid gap-4 lg:grid-cols-3 lg:gap-4">
+          {#each profileCards as card (card.name)}
+            <article
+              class="flex h-full flex-col rounded-[1.75rem] border border-white/15 bg-[rgba(22,21,39,0.2)] px-6 py-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] sm:px-8 sm:py-9"
             >
-              <img
-                class="h-full w-full object-cover"
-                src={card.imageSrc}
-                alt={`${card.name} profile`}
-              />
-            </div>
+              <div class="mb-7 flex flex-col items-center text-center">
+                <div
+                  class="mb-6 h-36 w-36 overflow-hidden rounded-[2rem] border border-white/10 shadow-[0_18px_40px_rgba(18,18,34,0.28)] sm:h-40 sm:w-40"
+                >
+                  <img
+                    class="h-full w-full object-cover"
+                    src={card.imageSrc}
+                    alt={`${card.name} profile`}
+                  />
+                </div>
 
-            <p class="mb-2 text-sm text-white/55 sm:text-base">{card.role}</p>
-            <p class="mb-1 text-sm text-white/35">{card.name}</p>
-            <h2 class="mb-3 text-3xl font-bold tracking-[-0.03em] text-white">{card.nickname}</h2>
+                <p
+                  class="mb-2 font-['Noto_Sans_KR',sans-serif] text-sm tracking-[-0.02em] text-white/58 sm:text-base"
+                >
+                  {card.role}
+                </p>
+                <p class="mb-1 font-['Noto_Sans_KR',sans-serif] text-sm text-white/32">
+                  {card.name}
+                </p>
+                <h2
+                  class="font-['Noto_Sans_KR',sans-serif] text-[2rem] font-bold tracking-[-0.04em] text-white"
+                >
+                  {card.nickname}
+                </h2>
+              </div>
 
-            <ul class="w-full space-y-3 text-left text-base leading-7 text-white/75">
-              {#each card.highlights as highlight (highlight)}
-                <li class="flex gap-3">
-                  <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-white/55"></span>
-                  <span>{highlight}</span>
-                </li>
-              {/each}
-            </ul>
-          </div>
-        </article>
-      {/each}
-    </section>
-  </div>
+              <ul
+                class="grid gap-3 font-['Noto_Sans_KR',sans-serif] text-[0.95rem] leading-[1.75] tracking-[-0.01em] text-white/78 sm:text-base"
+              >
+                {#each card.highlights as highlight (highlight)}
+                  <li class="flex gap-3">
+                    <span class="mt-[0.72rem] h-1.5 w-1.5 shrink-0 rounded-full bg-white/55"></span>
+                    <span>{highlight}</span>
+                  </li>
+                {/each}
+              </ul>
+            </article>
+          {/each}
+        </section>
+      </div>
+    </div>
+  </section>
+
+  
 </section>
