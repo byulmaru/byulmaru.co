@@ -44,5 +44,8 @@
   },
   "dependencies": {
     "lucide-svelte": "^1.0.1"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild"]
   }
 }
