@@ -1016,8 +1016,8 @@
     color: var(--ink-mid);
   }
   .callout-green {
-    background: rgba(171, 205, 238, 0.14);
-    border-left: 4px solid var(--blue);
+    background: rgba(187, 247, 208, 0.14);
+    border-left: 4px solid #22c55e;
     border-radius: 6px;
     padding: 14px 18px;
     font-size: 13px;
