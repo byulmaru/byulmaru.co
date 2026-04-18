@@ -292,7 +292,7 @@
     <div class="stack-list">
       {#each [
         { label: '핵심 프로토콜', detail: '<strong>ActivityPub (W3C 표준)</strong> — Actor 모델 기반의 분산 메시징. WebFinger로 사용자 검색, HTTP Signatures로 요청 인증, Inbox/Outbox 구조로 서버 간 Activity 전달.' },
-        { label: '기존 레퍼런스', detail: '<strong>마스토돈</strong> (Ruby on Rails · 안정적, 클라이언트 생태계 풍부), <strong>미스키/체리픽</strong> (Node.js · 커모지 리액션, 풍부한 UI), <strong>Misskey Hubzilla</strong> 등. 오픈소스라 코드 참고 가능.' },
+        { label: '기존 레퍼런스', detail: '<strong>마스토돈</strong> (Ruby on Rails · 안정적, 클라이언트 생태계 풍부), <strong>미스키/체리픽</strong> (Node.js · 커모지 리액션, 풍부한 UI), <strong>Misskey, Hubzilla</strong> 등. 오픈소스라 코드 참고 가능.' },
         { label: '주요 구현 과제', detail: '<strong>분산 팔로우 그래프</strong> 관리, <strong>원격 Activity 수신·발송</strong> 큐 처리, <strong>Webfinger / NodeInfo</strong> 엔드포인트 구현, 연합 미지원 기능(커스텀 이모지 리액션 등)의 하위 호환 처리.' },
         { label: '우리만의 추가 개발', detail: '동인 특화 <strong>태그 기반 검색 인덱싱</strong>, AI 크롤러 차단 미들웨어, 커뮤니티 광고 심사 시스템, 데이터 이관(Export/Import) 표준 지원.' },
       ] as item (item.label)}
