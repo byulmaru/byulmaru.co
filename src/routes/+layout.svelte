@@ -13,6 +13,15 @@
   ] as const;
 </script>
 
+<svelte:head>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@500&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+</svelte:head>
+
 <div class="flex min-h-screen w-full flex-col">
   <Header {navItems} />
 

@@ -33,10 +33,10 @@
   >
     <div class="flex flex-col items-start gap-8">
       <h1
-        class="font-['Noto_Serif_KR',serif] text-[clamp(2.7rem,6.9vw,5.5rem)] font-bold leading-[1.02] tracking-[-0.05em] text-[#19192b]"
+        class="max-w-[699px] font-['Noto_Sans_KR',sans-serif] text-[clamp(2.45rem,5vw,4.375rem)] font-bold leading-[1.08] tracking-[-0.045em] text-[#19192b] lg:leading-[1]"
       >
-        <span class="block">동인이 만드는,</span>
-        <span class="block">동인을 위한 플랫폼</span>
+        <span class="block lg:whitespace-nowrap">동인이 만드는,</span>
+        <span class="block lg:whitespace-nowrap">동인을 위한 플랫폼</span>
       </h1>
 
       <p
@@ -48,7 +48,7 @@
 
     <div
       aria-hidden="true"
-      class="mx-auto aspect-square w-full max-w-[18.8125rem] rounded-[1.875rem] bg-[rgba(255,255,255,0.9)] shadow-[0_12px_30px_rgba(29,29,49,0.08)]"
+      class="invisible mx-auto aspect-square w-full max-w-[18.8125rem] rounded-[1.875rem] bg-[rgba(255,255,255,0.9)] shadow-[0_12px_30px_rgba(29,29,49,0.08)]"
     ></div>
   </section>
 
