@@ -42,7 +42,7 @@
       <p
         class="max-w-[24.75rem] font-['Noto_Sans_KR',sans-serif] text-[1.125rem] leading-[1.7] tracking-[-0.02em] text-black/60 sm:text-[1.5rem]"
       >
-        클로드가 추천해준 배치를 해보고있어요.
+        동인을 위한 안전한 공간을 추구합니다. 
       </p>
     </div>
 
@@ -52,55 +52,7 @@
     ></div>
   </section>
 
-  <Divider />
-
-  <section class="px-4 py-[3.125rem] sm:px-8 lg:px-16">
-    <blockquote
-      class="border-l-4 border-[#22223b73] pl-8 font-['Noto_Serif_KR',serif] text-[clamp(2rem,4vw,2.5rem)] leading-[1.4] tracking-[-0.02em] text-[#22223b]"
-    >
-      “ 뭔가 멋진 말 ”
-    </blockquote>
-  </section>
-
-  <Divider />
-
-  <section class="px-4 py-12 sm:px-8 lg:px-16">
-    <div class="grid gap-6">
-      <div class="grid gap-6 lg:grid-cols-2">
-        {#each textRows.slice(0, 2) as row (row.label)}
-          <article
-            class="min-h-[10.25rem] rounded-[1.875rem] border border-[#3c3b59] bg-white/[0.06] px-6 py-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
-          >
-            <p
-              class="mb-2 font-['DM_Mono',monospace] text-[0.75rem] leading-none tracking-[0.07em] text-white"
-            >
-              {row.label}
-            </p>
-            <p
-              class="font-['Noto_Sans_KR',sans-serif] text-[1rem] leading-[1.75] tracking-[-0.005em] text-white/88 sm:text-[1.125rem]"
-            >
-              {row.body}
-            </p>
-          </article>
-        {/each}
-      </div>
-
-      <article
-        class="min-h-[10.25rem] rounded-[1.875rem] border border-[#3c3b59] bg-white/[0.06] px-6 py-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
-      >
-        <p
-          class="mb-2 font-['DM_Mono',monospace] text-[0.75rem] leading-none tracking-[0.07em] text-white"
-        >
-          {textRows[2].label}
-        </p>
-        <p
-          class="font-['Noto_Sans_KR',sans-serif] text-[1rem] leading-[1.75] tracking-[-0.005em] text-white/88 sm:text-[1.125rem]"
-        >
-          {textRows[2].body}
-        </p>
-      </article>
-    </div>
-  </section>
+  
 
   <Divider />
 
