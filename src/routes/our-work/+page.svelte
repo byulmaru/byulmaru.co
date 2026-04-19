@@ -1,10 +1,37 @@
 <script>
-  import Divider from '$lib/components/Divider.svelte';
   import { onMount } from 'svelte';
+
+  import Divider from '$lib/components/Divider.svelte';
+
+  const fediverseCompare = [
+    [
+      '신규 사용자 진입',
+      '앱 설치 후 바로 가입',
+      { no: '서버 선택부터 설명 필요' },
+      { yes: '트위터처럼 바로 가입' },
+    ],
+    [
+      '서버 운영 주체',
+      'X Corp. 단독',
+      '누구나 (개인·단체·기업)',
+      { yes: '별마루동인협동조합(가칭)' },
+    ],
+    [
+      '타 서버 팔로우',
+      { no: '불가' },
+      { yes: '가능 (ActivityPub)' },
+      { yes: '가능 (ActivityPub + AT Protocol(예정))' },
+    ],
+    ['광고 정책', '무제한 광고', '서버마다 다름', { yes: '커뮤니티 자체 광고 중심' }],
+    ['소프트웨어', '비공개', '대부분 오픈소스', { yes: '자체 개발 (신규)' }],
+    ['데이터 이동권', { no: '제한적' }, { yes: '표준 지원' }, { yes: '지원 예정' }],
+  ];
 
   onMount(() => {
     const container = document.getElementById('stars');
-    if (!container) return;
+    if (!container) {
+      return;
+    }
     for (let i = 0; i < 120; i++) {
       const s = document.createElement('div');
       s.className = 'star';
@@ -116,7 +143,7 @@
           </tr>
         </thead>
         <tbody>
-          {#each [['신규 사용자 진입', '앱 설치 후 바로 가입', { no: '서버 선택부터 설명 필요' }, { yes: '트위터처럼 바로 가입' }], ['서버 운영 주체', 'X Corp. 단독', '누구나 (개인·단체·기업)', { yes: '별마루동인협동조합' }], ['타 서버 팔로우', { no: '불가' }, { yes: '가능 (연합)' }, { yes: '가능 (ActivityPub)' }], ['알고리즘 피드', '강제 적용', '시간순 기본 / 선택적', { yes: '사용자 선택' }], ['광고 정책', '무제한 광고', '서버마다 다름', { yes: '커뮤니티 자체 광고 중심' }], ['소프트웨어', '비공개', '대부분 오픈소스', { yes: '자체 개발 (신규)' }], ['데이터 이동권', { no: '제한적' }, { yes: '표준 지원' }, { yes: '지원 예정' }]] as row (row[0])}
+          {#each fediverseCompare as row (row[0])}
             <tr>
               <td class="row-label">{row[0]}</td>
               {#each [row[1], row[2], row[3]] as cell (cell)}
