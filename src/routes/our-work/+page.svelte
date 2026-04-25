@@ -1020,7 +1020,7 @@
         <!-- Schema relation hint -->
         <div class="schema-relation">
           <div class="sr-chain">
-            {#each [['account', 'ACCT0…'], ['profile', 'PRFL0…'], ['post', 'POST0…'], ['post_content', 'PSTC0…']] as [t, pk], i (t)}
+            {#each [['account', 'ACCT0…'], ['profile', 'PRFL0…'], ['post', 'POST0…'], ['post_content', 'POCT0…']] as [t, pk], i (t)}
               <div class="sr-table">
                 <span class="sr-name">{t}</span>
                 <span class="sr-pk">{pk}</span>
