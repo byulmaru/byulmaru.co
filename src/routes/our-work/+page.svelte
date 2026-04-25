@@ -222,6 +222,25 @@
     },
   ];
 
+  function handleTabKeydown(event) {
+    const idx = tabs.findIndex((t) => t.id === activeTab);
+    let nextIdx = idx;
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+      nextIdx = (idx + 1) % tabs.length;
+    } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+      nextIdx = (idx - 1 + tabs.length) % tabs.length;
+    } else if (event.key === 'Home') {
+      nextIdx = 0;
+    } else if (event.key === 'End') {
+      nextIdx = tabs.length - 1;
+    } else {
+      return;
+    }
+    event.preventDefault();
+    activeTab = tabs[nextIdx].id;
+    document.getElementById('tab-' + tabs[nextIdx].id)?.focus();
+  }
+
   $effect(() => {
     if (activeTab !== 'overview') return;
     const container = document.getElementById('stars');
@@ -252,14 +271,16 @@
   <!-- ── TAB BAR (항상 상단) ──────────────────────────── -->
   <section class="tab-shell" aria-label="Our Work categories">
     <div class="container">
-      <div class="tab-list" role="tablist" aria-label="Our Work categories">
+      <div class="tab-list" role="tablist" aria-label="Our Work categories" onkeydown={handleTabKeydown}>
         {#each tabs as tab (tab.id)}
           <button
+            id={'tab-' + tab.id}
             class:active={activeTab === tab.id}
             type="button"
             role="tab"
             aria-selected={activeTab === tab.id}
             aria-controls={'panel-' + tab.id}
+            tabindex={activeTab === tab.id ? 0 : -1}
             onclick={() => (activeTab = tab.id)}
           >
             <span class="tab-label">{tab.label}</span>
