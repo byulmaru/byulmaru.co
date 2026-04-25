@@ -334,6 +334,7 @@
   </section>
 
   {#if activeTab === 'overview'}
+    <div role="tabpanel" id="panel-overview" aria-labelledby="tab-overview">
     <!-- ── HERO (Overview에만 표시) ────────────────────── -->
     <div class="hero">
       <div class="stars" id="stars"></div>
@@ -359,7 +360,7 @@
     <Divider />
 
     <!-- ── 01 · 페디버스가 뭔가요? ──────────────────────── -->
-    <section class="ow-section tab-panel" id="panel-overview">
+    <section class="ow-section tab-panel">
       <div class="container">
         <p class="sec-label">01 · Background</p>
         <h2 class="sec-title">페디버스가 뭔가요?</h2>
@@ -722,6 +723,7 @@
         </div>
       </div>
     </section>
+    </div>
   {:else if activeTab === 'mvp'}
     <!-- ── MVP SCOPE ─────────────────────────────────────── -->
     <section class="ow-section tab-panel" id="panel-mvp">
@@ -811,8 +813,9 @@
       </div>
     </section>
   {:else if activeTab === 'architecture'}
+    <div role="tabpanel" id="panel-architecture" aria-labelledby="tab-architecture">
     <!-- ── ARCHITECTURE ──────────────────────────────────── -->
-    <section class="ow-section tab-panel" id="panel-architecture">
+    <section class="ow-section tab-panel">
       <div class="container">
         <p class="sec-label">kosmo-docs · Inner Architecture</p>
         <h2 class="sec-title">Inner Architecture</h2>
@@ -962,7 +965,7 @@
     </section>
 
     <!-- ── OUTER ARCHITECTURE ────────────────────────────── -->
-    <section class="ow-section" id="panel-outer-architecture">
+    <section class="ow-section">
       <div class="container">
         <p class="sec-label">kosmo-docs · Outer Architecture</p>
         <h2 class="sec-title">Outer Architecture</h2>
@@ -1076,6 +1079,7 @@
         </div>
       </div>
     </section>
+    </div>
   {:else if activeTab === 'data'}
     <!-- ── DATA & OPS ────────────────────────────────────── -->
     <section class="ow-section tab-panel" id="panel-data">
