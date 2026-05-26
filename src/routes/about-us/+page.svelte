@@ -1,6 +1,6 @@
 <script lang="ts">
   import Divider from '$lib/components/Divider.svelte';
-  import avatarHyeju from '$lib/assets/avatar-hyeju.jpg';
+  import avatarHyeju from '$lib/assets/avatar-hyeju.png';
   import avatarJiyu from '$lib/assets/avatar-jiyu.png';
   import avatarYeeun from '$lib/assets/avatar-yeeun.png';
 
