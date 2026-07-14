@@ -6,7 +6,7 @@ Cloudflare Wrangler 로컬 프리뷰만 사용했다.
 
 ## 검증 환경과 명령
 
-- Node.js: Codex bundled Node
+- Node.js: 로컬 검증은 Codex bundled Node, Cloudflare Workers Builds는 `.node-version`의 `22.22.0`
 - 브라우저: `/Applications/Google Chrome.app/Contents/MacOS/Google Chrome`
 - Playwright: 프로젝트 dev dependency `playwright-core@1.61.1`
 - pixel decoder: 프로젝트 dev dependency `sharp@0.34.5`
@@ -139,6 +139,18 @@ location key가 바뀔 때만 같은 계약을 적용하는 `RouteAccessibility`
 React Router 8.2가 `isbot@5`를 manifest에 자동 추가한다. CI frozen lockfile에서는 그 즉시 manifest와
 lockfile 불일치로 실패하므로 React Router가 요구하는 직접 런타임 의존성으로 유지했다.
 
+### Cloudflare 원격 빌드 Node 버전
+
+첫 PR push에서 Cloudflare Workers Builds가 실패했다. 로컬 설치된 `@react-router/dev@8.2.0`과
+`react-router@8.2.0`은 Node `>=22.22.0`을 요구하지만, Cloudflare build image의 기본 Node는
+`22.16.0`이다. 로그 인증은 없었으나 로컬 build/deploy dry-run은 통과하고 런타임 요구사항만 원격
+기본값을 넘으므로 이 버전 차이를 원인으로 판단했다.
+
+Cloudflare가 공식 지원하는 version file override를 사용해 `.node-version`을 `22.22.0`으로 고정하고,
+파일이 사라지거나 값이 바뀌면 실패하는 회귀 테스트를 추가했다. 근거는
+[Cloudflare Workers Builds build image](https://developers.cloudflare.com/workers/ci-cd/builds/build-image/)에
+기록된 기본값과 `.node-version` override 계약이다.
+
 ## Cloudflare 로컬 프리뷰
 
 `CI=true pnpm run preview`는 React Router build, prerender, `verify:build`를 통과한 뒤 Wrangler
@@ -160,9 +172,10 @@ lockfile 불일치로 실패하므로 React Router가 요구하는 직접 런타
 
 ## 최종 자동 검증
 
-- `CI=true pnpm run check`: PASS, 9 test files / 22 tests
+- `CI=true pnpm run check`: PASS, 10 test files / 23 tests
 - `CI=true pnpm run lint`: PASS
 - `CI=true pnpm run build`: PASS, 세 HTML prerender와 SPA fallback 생성, `verify:build` PASS
+- `CI=true pnpm exec wrangler deploy --dry-run`: PASS, 25개 static asset과 assets-only Worker 구성 확인
 - `git diff --check`: PASS
 - Svelte 런타임·직접 의존성·편집기 설정 residue 검색: 결과 없음. lockfile에 나타나는
   `prettier-plugin-svelte` 문자열은 설치 항목이 아니라 범용 Prettier 플러그인의 optional peer
