@@ -15,15 +15,15 @@ it('mounts one active panel and recreates the overview stars after returning', a
 
   fireEvent.click(screen.getByRole('tab', { name: /MVP Scope/ }));
 
-  expect(screen.getAllByRole('tabpanel')).toHaveLength(1);
-  expect(screen.getByRole('tabpanel')).toHaveAttribute('id', 'panel-mvp');
+  expect(screen.queryAllByRole('tabpanel')).toHaveLength(0);
+  expect(container.querySelector('#panel-mvp')).not.toHaveAttribute('role');
   expect(screen.getByRole('heading', { name: 'MVP 범위' })).toBeVisible();
   expect(container.querySelectorAll('[data-star]')).toHaveLength(0);
 
   fireEvent.click(screen.getByRole('tab', { name: /User Journey/ }));
 
-  expect(screen.getAllByRole('tabpanel')).toHaveLength(1);
-  expect(screen.getByRole('tabpanel')).toHaveAttribute('id', 'panel-journey');
+  expect(screen.queryAllByRole('tabpanel')).toHaveLength(0);
+  expect(container.querySelector('#panel-journey')).not.toHaveAttribute('role');
   expect(
     screen.getByRole('heading', {
       name: '가입부터 연합, 탐색, 통합 피드까지의 핵심 여정',
@@ -38,8 +38,8 @@ it('mounts one active panel and recreates the overview stars after returning', a
 
   fireEvent.click(screen.getByRole('tab', { name: /Data & Ops/ }));
 
-  expect(screen.getAllByRole('tabpanel')).toHaveLength(1);
-  expect(screen.getByRole('tabpanel')).toHaveAttribute('id', 'panel-data');
+  expect(screen.queryAllByRole('tabpanel')).toHaveLength(0);
+  expect(container.querySelector('#panel-data')).not.toHaveAttribute('role');
   expect(screen.getByRole('heading', { name: 'DB Schema' })).toBeVisible();
 
   fireEvent.click(screen.getByRole('tab', { name: /Overview/ }));

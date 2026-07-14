@@ -5,12 +5,7 @@ import styles from '../our-work.module.css';
 
 export function MvpPanel(): ReactElement {
   return (
-    <section
-      className={`${styles['ow-section']} ${styles['tab-panel']}`}
-      id="panel-mvp"
-      role="tabpanel"
-      aria-labelledby="tab-mvp"
-    >
+    <section className={`${styles['ow-section']} ${styles['tab-panel']}`} id="panel-mvp">
       <div className={styles.container}>
         <p className={styles['sec-label']}>kosmo-docs · MVP Scope</p>
         <h2 className={styles['sec-title']}>MVP 범위</h2>

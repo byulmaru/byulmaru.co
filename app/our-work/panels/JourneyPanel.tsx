@@ -5,12 +5,7 @@ import styles from '../our-work.module.css';
 
 export function JourneyPanel(): ReactElement {
   return (
-    <section
-      className={`${styles['ow-section']} ${styles['tab-panel']}`}
-      id="panel-journey"
-      role="tabpanel"
-      aria-labelledby="tab-journey"
-    >
+    <section className={`${styles['ow-section']} ${styles['tab-panel']}`} id="panel-journey">
       <div className={styles.container}>
         <p className={styles['sec-label']}>kosmo-docs · User Scenarios</p>
         <h2 className={styles['sec-title']}>가입부터 연합, 탐색, 통합 피드까지의 핵심 여정</h2>

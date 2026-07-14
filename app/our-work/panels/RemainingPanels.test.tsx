@@ -16,8 +16,8 @@ it('preserves the MVP scope content and counts', () => {
   expect(container.querySelectorAll(`.${styles['scope-item']}`)).toHaveLength(6);
   expect(container.querySelectorAll(`.${styles['oos-item']}`)).toHaveLength(9);
   expect(container.querySelectorAll(`.${styles['metric-row']}`)).toHaveLength(11);
-  expect(screen.getByRole('tabpanel')).toHaveAttribute('id', 'panel-mvp');
-  expect(screen.getByRole('tabpanel')).toHaveAttribute('aria-labelledby', 'tab-mvp');
+  expect(container.querySelector('#panel-mvp')).not.toHaveAttribute('role');
+  expect(container.querySelector('#panel-mvp')).not.toHaveAttribute('aria-labelledby');
   expectOnlyOurWorkModuleClasses(container);
 });
 
@@ -30,8 +30,8 @@ it('preserves the six user journeys', () => {
     }),
   ).toBeVisible();
   expect(container.querySelectorAll(`.${styles['journey-item']}`)).toHaveLength(6);
-  expect(screen.getByRole('tabpanel')).toHaveAttribute('id', 'panel-journey');
-  expect(screen.getByRole('tabpanel')).toHaveAttribute('aria-labelledby', 'tab-journey');
+  expect(container.querySelector('#panel-journey')).not.toHaveAttribute('role');
+  expect(container.querySelector('#panel-journey')).not.toHaveAttribute('aria-labelledby');
   expectOnlyOurWorkModuleClasses(container);
 });
 
@@ -62,8 +62,8 @@ it('preserves all nine source schema cards, principles, and launch metrics', () 
   expect(container.querySelectorAll(`.${styles['data-card']}`)).toHaveLength(6);
   expect(container.querySelectorAll(`.${styles['metric-row']}`)).toHaveLength(launchMetrics.length);
   expect(launchMetrics).toHaveLength(11);
-  expect(screen.getByRole('tabpanel')).toHaveAttribute('id', 'panel-data');
-  expect(screen.getByRole('tabpanel')).toHaveAttribute('aria-labelledby', 'tab-data');
+  expect(container.querySelector('#panel-data')).not.toHaveAttribute('role');
+  expect(container.querySelector('#panel-data')).not.toHaveAttribute('aria-labelledby');
 
   const schemaCards = container.querySelectorAll(`.${styles['schema-card']}`);
   expect(within(schemaCards[0] as HTMLElement).getByText('account')).toBeVisible();

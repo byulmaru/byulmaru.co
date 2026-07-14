@@ -6,12 +6,7 @@ import styles from '../our-work.module.css';
 
 export function DataOpsPanel(): ReactElement {
   return (
-    <section
-      className={`${styles['ow-section']} ${styles['tab-panel']}`}
-      id="panel-data"
-      role="tabpanel"
-      aria-labelledby="tab-data"
-    >
+    <section className={`${styles['ow-section']} ${styles['tab-panel']}`} id="panel-data">
       <div className={styles.container}>
         <p className={styles['sec-label']}>kosmo-docs · DB Schema</p>
         <h2 className={styles['sec-title']}>DB Schema</h2>
