@@ -11,6 +11,15 @@ import {
 } from 'react-router';
 
 import type { Route } from './+types/root';
+import { Footer } from './components/Footer';
+import type { NavItem } from './components/Header';
+import { Header } from './components/Header';
+
+const navItems = [
+  { href: '/', label: 'About Team' },
+  { href: '/about-us', label: 'About us' },
+  { href: '/our-work', label: 'Our Work' },
+] as const satisfies readonly NavItem[];
 
 export function Layout({ children }: { children: ReactNode }) {
   return (
@@ -20,6 +29,12 @@ export function Layout({ children }: { children: ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="text-scale" content="scale" />
         <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@500&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;700&display=swap"
+          rel="stylesheet"
+        />
         <Meta />
         <Links />
       </head>
@@ -35,9 +50,13 @@ export function Layout({ children }: { children: ReactNode }) {
 export default function App() {
   return (
     <div className="flex min-h-screen w-full flex-col">
+      <Header navItems={navItems} />
+
       <main className="flex-1">
         <Outlet />
       </main>
+
+      <Footer navItems={navItems} />
     </div>
   );
 }
