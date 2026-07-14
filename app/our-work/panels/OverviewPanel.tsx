@@ -33,14 +33,12 @@ export function OverviewPanel(): ReactElement {
           <span className={styles['hero-tag']}>For Developers · Project Introduction</span>
           <h1 className={styles['hero-title']}>
             트위터를 대체할
-            <br />
-            <em>우리만의 SNS</em>를 만듭니다
+            <br /> <em>우리만의 SNS</em>를 만듭니다
           </h1>
           <p className={styles['hero-desc']}>
             마스토돈 인스턴스로 시작한 동인 커뮤니티 플랫폼을,
-            <br />
-            ActivityPub 기반의 자체 SNS 서비스로 재개발합니다.
-            <br />이 페이지는 페디버스를 처음 접하는 개발자를 위해 작성했어요.
+            <br /> ActivityPub 기반의 자체 SNS 서비스로 재개발합니다.
+            <br /> 이 페이지는 페디버스를 처음 접하는 개발자를 위해 작성했어요.
           </p>
           <div className={styles['hero-chips']}>
             {OVERVIEW_HERO_CHIPS.map((chip) => (

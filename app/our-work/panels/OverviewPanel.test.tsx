@@ -8,7 +8,10 @@ it('preserves the overview sections and item counts', () => {
   const { container } = render(<OverviewPanel />);
 
   expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
-    '트위터를 대체할우리만의 SNS를 만듭니다',
+    '트위터를 대체할 우리만의 SNS를 만듭니다',
+  );
+  expect(container.querySelector(`.${styles['hero-desc']}`)).toHaveTextContent(
+    '마스토돈 인스턴스로 시작한 동인 커뮤니티 플랫폼을, ActivityPub 기반의 자체 SNS 서비스로 재개발합니다. 이 페이지는 페디버스를 처음 접하는 개발자를 위해 작성했어요.',
   );
   expect(container.querySelectorAll(`.${styles['compare-table']} tbody tr`)).toHaveLength(6);
   expect(container.querySelectorAll(`.${styles['reason-card']}`)).toHaveLength(4);

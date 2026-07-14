@@ -20,4 +20,8 @@ for (const [path, title] of [
   if (!html.includes(title)) {
     throw new Error(`${path} is missing ${title}`);
   }
+
+  if (!html.includes('<html lang="en">')) {
+    throw new Error(`${path} does not preserve the original document language`);
+  }
 }

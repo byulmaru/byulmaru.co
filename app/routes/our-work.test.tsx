@@ -9,7 +9,7 @@ it('mounts one active panel and recreates the overview stars after returning', a
   expect(screen.getAllByRole('tabpanel')).toHaveLength(1);
   expect(screen.getByRole('tabpanel')).toHaveAttribute('id', 'panel-overview');
   expect(
-    screen.getByRole('heading', { name: '트위터를 대체할우리만의 SNS를 만듭니다' }),
+    screen.getByRole('heading', { name: '트위터를 대체할 우리만의 SNS를 만듭니다' }),
   ).toBeVisible();
   const firstStar = container.querySelector('[data-star]');
 
