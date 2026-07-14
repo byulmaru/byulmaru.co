@@ -1,13 +1,11 @@
 import { mkdir, readdir, unlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 
 import { chromium } from 'playwright-core';
 
-const root = fileURLToPath(new URL('../..', import.meta.url));
 const baseUrl = process.env.BASE_URL ?? 'http://127.0.0.1:5173';
-const outputDir = process.env.SCREENSHOT_DIR ?? path.join(root, 'artifacts', 'react');
+const outputDir = process.env.SCREENSHOT_DIR ?? path.join(tmpdir(), 'byulmaru-react-screenshots');
 const chrome =
   process.env.CHROME_PATH ?? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const resultsPath =

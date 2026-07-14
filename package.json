@@ -16,8 +16,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "verify:build": "node scripts/verify-build.mjs",
-    "verify:browser": "node scripts/verification/react-browser.mjs",
-    "verify:pixels": "node scripts/verification/react-pixel-diff.mjs"
+    "verify:browser": "node scripts/verification/react-browser.mjs"
   },
   "devDependencies": {
     "@eslint/compat": "^2.0.4",
@@ -42,7 +41,6 @@
     "prettier": "^3.8.1",
     "prettier-plugin-brace-style": "^0.10.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
-    "sharp": "0.34.5",
     "tailwindcss": "^4.2.2",
     "typescript": "^6.0.2",
     "typescript-eslint": "^8.58.1",

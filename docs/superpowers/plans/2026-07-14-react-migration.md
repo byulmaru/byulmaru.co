@@ -51,7 +51,7 @@
 ### Task 1: 변환 전 기준선과 React 정적 프리렌더 골격
 
 **Files:**
-- Create: `artifacts/baseline/`의 라우트·뷰포트별 PNG
+- Temporary: worktree 밖 OS 임시 디렉터리의 라우트·뷰포트별 Svelte PNG
 - Create: `app/root.tsx`
 - Create: `app/routes.ts`
 - Create: `app/routes/home.tsx`
@@ -73,7 +73,7 @@ Run: `pnpm run dev -- --host 127.0.0.1`
 
 Capture: `/`, `/about-us`, `/our-work`의 375×812, 768×1024, 1280×900 화면. `/our-work`는 다섯 탭 각각을 기록한다.
 
-Expected: 모바일/태블릿/데스크톱 기준 PNG와 메뉴·탭 동작 메모가 `artifacts/baseline/`에 존재한다.
+Expected: 모바일/태블릿/데스크톱 기준 PNG와 메뉴·탭 동작 메모를 로컬에서 확인한다. 캡처는 마이그레이션 검증용 임시 자료이며 저장소에는 커밋하지 않는다.
 
 - [ ] **Step 2: Svelte 의존성을 pnpm CLI로 제거한다**
 
@@ -503,7 +503,7 @@ av commit -A -m "build: Cloudflare 정적 React 배포로 전환"
 ### Task 7: 동등성 검증, 수정, 최종 전달
 
 **Files:**
-- Create: `artifacts/react/`의 라우트·뷰포트별 PNG
+- Temporary: worktree 밖 OS 임시 디렉터리의 라우트·뷰포트별 React PNG
 - Create: `docs/verification/2026-07-14-react-migration.md`
 - Modify: 검증에서 회귀가 발견된 React/CSS/test 파일
 
@@ -514,7 +514,7 @@ av commit -A -m "build: Cloudflare 정적 React 배포로 전환"
 
 Run: `pnpm run dev -- --host 127.0.0.1`
 
-Capture: 기준선과 동일한 라우트, 뷰포트, 탭 상태를 `artifacts/react/`에 저장한다.
+Capture: 기준선과 동일한 라우트, 뷰포트, 탭 상태를 OS 임시 디렉터리에 저장하고 로컬에서 비교한다. 캡처는 저장소에 커밋하지 않는다.
 
 - [ ] **Step 2: 시각·상호작용 동등성을 비교한다**
 
