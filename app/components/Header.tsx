@@ -16,7 +16,7 @@ export function Header({ navItems }: { navItems: readonly NavItem[] }) {
     <header className="w-full px-5 py-6 sm:px-8 sm:py-7 lg:px-12 lg:py-6">
       <div className="mx-auto grid w-full max-w-[1280px] grid-cols-[1fr_auto] items-center gap-6 lg:grid-cols-[320px_1fr]">
         <div className="flex items-center justify-between gap-4">
-          <Link className="w-fit shrink-0" to="/">
+          <Link className="w-fit shrink-0" to="/" prefetch="intent">
             <img
               className="h-auto w-40 sm:w-52 lg:w-[20rem]"
               src={logoBlackFull}
@@ -48,6 +48,7 @@ export function Header({ navItems }: { navItems: readonly NavItem[] }) {
                 <Link
                   className="block px-1 py-1 font-['DM_Mono',monospace] text-base tracking-[-0.01em] text-black/85 underline underline-offset-4 transition-colors hover:text-black"
                   to={item.href}
+                  prefetch="intent"
                 >
                   {item.label}
                 </Link>
@@ -69,6 +70,7 @@ export function Header({ navItems }: { navItems: readonly NavItem[] }) {
                 <Link
                   className="block rounded-2xl px-4 py-3 font-['DM_Mono',monospace] text-base text-black/85 transition-colors hover:bg-white/10"
                   to={item.href}
+                  prefetch="intent"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.label}

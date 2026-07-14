@@ -14,6 +14,7 @@ import type { Route } from './+types/root';
 import { Footer } from './components/Footer';
 import type { NavItem } from './components/Header';
 import { Header } from './components/Header';
+import { RouteAccessibility } from './components/RouteAccessibility';
 
 const navItems = [
   { href: '/', label: 'About Team' },
@@ -50,6 +51,7 @@ export function Layout({ children }: { children: ReactNode }) {
 export default function App() {
   return (
     <div className="flex min-h-screen w-full flex-col">
+      <RouteAccessibility />
       <Header navItems={navItems} />
 
       <main className="flex-1">
