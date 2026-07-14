@@ -1,6 +1,6 @@
 # Byulmaru — Night Editorial Hybrid
 
-> Status: decision candidate for PROD-349. This direction combines the strongest parts of Night First and Creator Color Blocks. Dark is the primary brand mode; Light is a complete alternate mode. The team must still approve this candidate before it becomes the production design system.
+> Status: approved canonical design system for the Byulmaru team site under PROD-349. This direction combines the strongest parts of Night First and Creator Color Blocks. Dark is the primary brand mode; Light is a complete alternate mode.
 
 ## Direction
 
@@ -100,7 +100,8 @@ Figma uses `Gothic A1 ExtraBold/Bold` for display and heading and `Noto Sans KR 
 - Header shape and spacing may evolve, but the logo artwork must remain the current team-site logo.
 - Figma uses an exact clone of the original `혼용＿로고 1` node inside an Off White logo field.
 - Production source: `src/lib/assets/logo-black-full.svg`.
-- Navigation order stays `Home`, `Our Work`, `About Us`.
+- The target navigation order is `Home`, `Our Work`, `About Us`.
+- This intentionally differs from the current implementation, which shares one navigation collection between the Header and Footer. Frontend implementation must define separate Header and Footer navigation collections so the Footer can preserve its existing order.
 - Dark and Light modes share the same header structure.
 
 ## Footer
@@ -234,7 +235,6 @@ The Figma file contains 26 variables in Dark and Light modes, 10 text styles, an
 
 ## Open decisions before production
 
-- Confirm whether this fourth candidate becomes the team-site design system.
 - Confirm the final Korean copy and `Our Work` pre-registration page content.
 - Confirm exact footer copyright, license attribution, and national-project support wording.
 - Replace Figma substitute fonts with production SUIT and Pretendard during implementation and recheck Korean line breaks.
