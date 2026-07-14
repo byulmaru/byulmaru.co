@@ -31,7 +31,7 @@ function renderHarness() {
   );
 }
 
-it('announces client routes and resets focus to body like SvelteKit', async () => {
+it('announces client routes and resets focus to body', async () => {
   const user = userEvent.setup();
   document.title = 'Byulmaru';
   const { container } = renderHarness();
