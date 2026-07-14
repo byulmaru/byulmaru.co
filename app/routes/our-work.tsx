@@ -1,8 +1,21 @@
+import type { ComponentType } from 'react';
 import { useState } from 'react';
 
 import { OurWorkTabs } from '../our-work/components/OurWorkTabs';
-import { StarField } from '../our-work/components/StarField';
 import type { OurWorkTabId } from '../our-work/content';
+import { ArchitecturePanel } from '../our-work/panels/ArchitecturePanel';
+import { DataOpsPanel } from '../our-work/panels/DataOpsPanel';
+import { JourneyPanel } from '../our-work/panels/JourneyPanel';
+import { MvpPanel } from '../our-work/panels/MvpPanel';
+import { OverviewPanel } from '../our-work/panels/OverviewPanel';
+
+const PANELS = {
+  overview: OverviewPanel,
+  mvp: MvpPanel,
+  journey: JourneyPanel,
+  architecture: ArchitecturePanel,
+  data: DataOpsPanel,
+} satisfies Record<OurWorkTabId, ComponentType>;
 
 export function meta() {
   return [{ title: 'Our Work — 별마루' }];
@@ -10,23 +23,18 @@ export function meta() {
 
 export default function OurWork() {
   const [activeTab, setActiveTab] = useState<OurWorkTabId>('overview');
+  const ActivePanel = PANELS[activeTab];
 
   return (
     <div className="our-work-page">
       <OurWorkTabs activeTab={activeTab} onChange={setActiveTab} />
-      <div
-        className={activeTab === 'overview' ? undefined : 'ow-section tab-panel'}
-        role="tabpanel"
-        id={`panel-${activeTab}`}
-        aria-labelledby={`tab-${activeTab}`}
-        key={activeTab}
-      >
-        {activeTab === 'overview' ? (
-          <div className="hero">
-            <StarField />
-          </div>
-        ) : null}
-      </div>
+      {activeTab === 'overview' ? (
+        <div role="tabpanel" id="panel-overview" aria-labelledby="tab-overview" key={activeTab}>
+          <ActivePanel />
+        </div>
+      ) : (
+        <ActivePanel key={activeTab} />
+      )}
     </div>
   );
 }

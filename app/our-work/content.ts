@@ -238,3 +238,272 @@ export const OVERVIEW_PAIN_POINTS = [
   need: string;
   ref: string;
 }[];
+
+type LabelBody = readonly [label: string, body: string];
+
+type NameDetail = readonly [name: string, detail: string];
+
+type Journey = readonly [code: string, title: string, body: string];
+
+export const mvpKicks = [
+  {
+    title: '1계정 다프로필',
+    body: '한 로그인으로 장르·커플링·비계 등 프로필을 여러 개 운영. 게시·팔로우·테마·공개 범위가 활성 프로필 기준으로 동작.',
+    tags: ['Must', 'Profile'],
+  },
+  {
+    title: '프로필 태그 라벨링/탐색',
+    body: '#그림계 #티알계 #장르명 등 태그를 프로필 자체에 부여. 태그+검색어로 사용자 검색, 보고 싶지 않은 태그는 뮤트.',
+    tags: ['Must', 'Discovery'],
+  },
+  {
+    title: 'AT Protocol Relay 수신',
+    body: 'Bluesky 계정 연결 없이 Relay/AppView에서 활동을 수신·캐시. ActivityPub 피드와 통합 표시.',
+    tags: ['Must', 'AT Protocol'],
+  },
+  {
+    title: '프로필별 테마 꾸미기',
+    body: '프로필마다 프리셋·포인트 컬러·배너를 다르게 설정. 공개 프로필 화면에 테마가 반영.',
+    tags: ['Must', 'Theme'],
+  },
+] as const satisfies readonly {
+  title: string;
+  body: string;
+  tags: readonly string[];
+}[];
+
+export const scopeGroups = [
+  [
+    '인증',
+    'OIDC SSoT. 세션·애플리케이션·활성 프로필 관리만 담당. 비밀번호·이메일 복구는 별마루 OIDC 위임.',
+  ],
+  [
+    '게시물',
+    'Note 작성·조회·삭제, CW, 공개범위, 해시태그·멘션 파싱 → Must. 수정·이미지 첨부·리트윗 → Should.',
+  ],
+  ['소셜 그래프', '팔로우·언팔로우·승인제 팔로우, 차단, 뮤트, 프로필 태그 기반 추천/뮤트 → Must.'],
+  [
+    '타임라인',
+    "홈·프로필·프로필 태그 탐색·AT Protocol 통합 피드·스레드 → Must. 로컬 타임라인 → Won't.",
+  ],
+  [
+    '연합',
+    'WebFinger, NodeInfo, Actor/Inbox/Outbox, HTTP Signatures, Create/Delete/Follow/Accept/Reject/Undo/Like/Block/Flag → Must.',
+  ],
+  ['모더레이션', '신고 큐, Suspend/Warn, 인스턴스 정책 → Must. 관리자 대시보드 → Should.'],
+] as const satisfies readonly LabelBody[];
+
+export const outOfScope = [
+  '자체 비밀번호·2FA·이메일 인증 → 별마루 OIDC 위임',
+  '폴 / 예약 게시 / 동영상 / DM 암호화',
+  '로컬 타임라인',
+  'ActivityPub ↔ AT Protocol 완전 양방향 브리지',
+  'Bluesky 계정 OAuth/App Password 연결',
+  '개인 레벨 도메인 차단',
+  '전문(본문) 검색 (ES/Meilisearch)',
+  '고급 추천 알고리즘',
+  '유료 구독 / 광고',
+] as const satisfies readonly string[];
+
+export const journeys = [
+  [
+    'S1',
+    '첫 가입',
+    'OIDC 로그인 후 첫 프로필을 만들고, 태그·태그 뮤트·테마·선택적 AT handle을 설정한 뒤 태그 기반 탐색 피드로 진입합니다.',
+  ],
+  [
+    'S2',
+    '첫 게시물',
+    '본문·이미지·CW·공개범위를 입력하면 DB commit과 큐 enqueue 후 즉시 응답하고, Delivery Worker가 Fediverse로 비동기 발신합니다.',
+  ],
+  [
+    'S3',
+    '외부 팔로우 수신',
+    'Mastodon 사용자가 @nana@kos.moe를 팔로우하면 WebFinger와 Actor 조회 후 팔로우 승인 정책에 따라 Accept 또는 Pending 알림으로 처리합니다.',
+  ],
+  [
+    'S4',
+    '멀티 프로필 전환',
+    '한 계정 안에서 새 프로필을 추가하고 active_profile_id를 바꾸면 작성·팔로우·좋아요·타임라인 기준이 선택 프로필로 전환됩니다.',
+  ],
+  [
+    'S5-1',
+    '프로필 태그 탐색/뮤트',
+    '포함 태그와 제외 태그를 조합해 사람을 찾고, 뮤트한 태그가 붙은 계정과 글은 홈과 탐색에서 기본적으로 숨깁니다.',
+  ],
+  [
+    'S5-2',
+    'AT Protocol 통합 피드',
+    'Bluesky handle/DID를 resolve하고 actor/record를 캐시한 뒤 ActivityPub 원격 글과 같은 피드 모델로 merge-sort합니다.',
+  ],
+] as const satisfies readonly Journey[];
+
+export const architectureDomainServices = [
+  'Auth',
+  'Profile',
+  'ProfileTag',
+  'Theme',
+  'Post',
+  'Feed',
+  'Social',
+  'Moderation',
+  'AT Protocol',
+] as const satisfies readonly string[];
+
+export const architectureWorkers = [
+  ['Delivery', 'outbound Activities'],
+  ['Inbox', 'inbound ActivityPub'],
+  ['AT Protocol Relay', 'relay/appview ingest'],
+  ['Media', 'thumb · blurhash'],
+  ['Notification', 'APNs · FCM'],
+] as const satisfies readonly NameDetail[];
+
+export const architectureExternals = [
+  ['Fediverse', 'ActivityPub S2S'],
+  ['AT Protocol Network', 'Relay / AppView'],
+  ['Byulmaru OIDC', 'token exchange'],
+  ['OCI Object Storage', 'media'],
+] as const satisfies readonly NameDetail[];
+
+export const outboundPipeline = [
+  'Client → POST /graphql createPost()',
+  'PostService → INSERT post + post_content (트랜잭션)',
+  'DomainEventBus emit("post.created")',
+  'BullMQ add("delivery", {activity, audience})',
+  'Delivery Worker → Fedify build Create(Note) + RSA sign',
+  'POST to external shared inbox (같은 도메인 팔로워는 1회)',
+  '실패 → exp-backoff 재시도 → 5회 후 DLQ',
+] as const satisfies readonly string[];
+
+export const inboundPipeline = [
+  'External instance → POST /inbox (signed)',
+  'Fedify: HTTP Signature 동기 검증',
+  '검증 실패 → 401',
+  '검증 성공 → BullMQ add("inbox", raw activity)',
+  '202 Accepted 즉시 응답',
+  'Inbox Worker → upsert remote actor',
+  'Worker → 활동 유형별 처리 (Create/Follow/Like…)',
+  'Redis ZADD 타임라인 캐시 갱신',
+] as const satisfies readonly string[];
+
+export const cicdSteps = [
+  ['PR', 'GitHub Actions'],
+  ['Actions', 'lint → test → docker buildx → push to GHCR'],
+  ['image.tag bump', 'values.yaml auto-bump PR'],
+  ['main merge', 'Argo CD auto-sync → kosmo-dev'],
+  ['release tag', 'Argo CD sync → kosmo-prod (Blue/Green)'],
+] as const satisfies readonly NameDetail[];
+
+export const schemaRelations = [
+  ['account', 'ACCT0…'],
+  ['profile', 'PRFL0…'],
+  ['post', 'POST0…'],
+  ['post_content', 'POCT0…'],
+] as const satisfies readonly NameDetail[];
+
+export const dataPrinciples = [
+  [
+    'PK 포맷',
+    'ACCT0, PRFL0, POST0처럼 prefix + 0 + ULID. 로그·운영에서 테이블 종류를 ID만으로 식별 가능.',
+  ],
+  [
+    '별도 PK',
+    'OIDC subject, handle, email 같은 비즈니스 식별자를 PK로 쓰지 않음. 모든 테이블에 내부 id 별도 보유.',
+  ],
+  [
+    'Enum 우선',
+    'boolean 대신 account_state, session_state, post_visibility, follow_state 같은 enum으로 상태 확장성 확보.',
+  ],
+  [
+    '기본값 최소화',
+    'DEFAULT now() 같은 DB 기본값 최소화. 초기값은 ORM/애플리케이션 레이어에서 명시.',
+  ],
+  ['초기 스키마 범위', '계정 → 프로필 → 게시물 → 팔로우의 가장 작은 뼈대만 먼저 확정.'],
+  [
+    '후속 마이그레이션',
+    '프로필 태그·테마·AT Protocol 캐시·미디어·알림·신고·차단/뮤트는 UX·정책 확정 후 추가.',
+  ],
+] as const satisfies readonly LabelBody[];
+
+export const launchMetrics = [
+  ['홈/프로필 태그 탐색 API p95', '< 300ms'],
+  ['게시물 작성 → 외부 인스턴스 도달 p95', '< 30초'],
+  ['AT Protocol ingest job 성공률', '≥ 95%'],
+  ['/inbox 5xx rate', '< 0.5%'],
+  ['내부 테스터 2개 이상 프로필 생성', '≥ 60%'],
+  ['프로필 태그 3개 이상 추가', '≥ 70%'],
+  ['프로필 태그 검색 → 팔로우/프로필 방문', '≥ 40%'],
+  ['프로필 테마 기본값 변경', '≥ 50%'],
+  ['AT Protocol 통합 피드 1회 이상 조회', '≥ 30%'],
+  ['외부 인스턴스 연합 E2E', '2곳 이상'],
+  ['첫 달 DAU', '≥ 30'],
+] as const satisfies readonly LabelBody[];
+
+export const dbTables = [
+  {
+    name: 'account',
+    pk: 'ACCT0…',
+    cols: ['oidc_subject', 'display_name', 'state'],
+    note: '로그인 단위. OIDC subject만 보유. 비밀번호 저장 ✗',
+  },
+  {
+    name: 'application',
+    pk: 'APPL0…',
+    cols: ['name'],
+    note: '공식 Expo 앱 1개. 서드파티는 v1.x',
+  },
+  {
+    name: 'application_secret',
+    pk: 'APSC0…',
+    cols: ['application_id', 'secret_hash', 'revoked_at'],
+    note: '원문 미저장, hash만. 교체·폐기 지원',
+  },
+  {
+    name: 'session',
+    pk: 'SESS0…',
+    cols: [
+      'account_id',
+      'application_id',
+      'active_profile_id',
+      'oidc_session_key',
+      'token_hash',
+      'expires_at',
+    ],
+    note: '프로필 전환 = active_profile_id 변경',
+  },
+  {
+    name: 'profile',
+    pk: 'PRFL0…',
+    cols: ['handle', 'display_name', 'bio', 'avatar_url', 'banner_url', 'follow_policy'],
+    note: '사회적 자아 단위. account_profile N:N으로 계정과 연결',
+  },
+  {
+    name: 'account_profile',
+    pk: 'ACPR0…',
+    cols: ['account_id', 'profile_id', 'role'],
+    note: '계정-프로필 N:N 연결. MVP에서는 role=OWNER만 사용',
+  },
+  {
+    name: 'post',
+    pk: 'POST0…',
+    cols: ['profile_id', 'visibility', 'state', 'current_content_id'],
+    note: '메타데이터. 본문은 post_content로 분리',
+  },
+  {
+    name: 'post_content',
+    pk: 'POCT0…',
+    cols: ['post_id', 'body_text', 'body_html', 'spoiler_text', 'revision_number'],
+    note: '수정 시 덮어쓰기 대신 새 버전 추가',
+  },
+  {
+    name: 'profile_follow',
+    pk: 'PFLW0…',
+    cols: ['follower_profile_id', 'followee_profile_id', 'state'],
+    note: 'PENDING / ACCEPTED / REJECTED. 홈 타임라인 기반',
+  },
+] as const satisfies readonly {
+  name: string;
+  pk: string;
+  cols: readonly string[];
+  note: string;
+}[];
