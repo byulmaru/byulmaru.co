@@ -1,6 +1,7 @@
 import { render, waitFor } from '@testing-library/react';
 import { renderToString } from 'react-dom/server';
 
+import { expectOnlyOurWorkModuleClasses } from '../test/assert-css-module-classes';
 import { StarField } from './StarField';
 
 it('does not render stars during prerender', () => {
@@ -24,4 +25,5 @@ it('adds 120 styled stars after mounting on the client', async () => {
   expect(star?.style.getPropertyValue('--d')).toMatch(/s$/);
   expect(star?.style.getPropertyValue('--delay')).toMatch(/^-.*s$/);
   expect(star?.style.getPropertyValue('--op')).not.toBe('');
+  expectOnlyOurWorkModuleClasses(container);
 });

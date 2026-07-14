@@ -2,10 +2,11 @@ import { fireEvent, render, screen, within } from '@testing-library/react';
 import { vi } from 'vitest';
 
 import { OUR_WORK_TABS } from '../content';
+import { expectOnlyOurWorkModuleClasses } from '../test/assert-css-module-classes';
 import { OurWorkTabs } from './OurWorkTabs';
 
 it('renders the original tabs with their ARIA relationships and roving tab stops', () => {
-  render(<OurWorkTabs activeTab="overview" onChange={vi.fn()} />);
+  const { container } = render(<OurWorkTabs activeTab="overview" onChange={vi.fn()} />);
 
   const tabList = screen.getByRole('tablist', { name: 'Our Work categories' });
   const tabs = within(tabList).getAllByRole('tab');
@@ -19,6 +20,7 @@ it('renders the original tabs with their ARIA relationships and roving tab stops
     expect(tabs[index]).toHaveAttribute('aria-selected', String(tab.id === 'overview'));
     expect(tabs[index]).toHaveAttribute('tabindex', tab.id === 'overview' ? '0' : '-1');
   });
+  expectOnlyOurWorkModuleClasses(container);
 });
 
 it('changes the active tab when a tab is clicked', () => {

@@ -70,9 +70,6 @@ const config = ts.config(
       '**/build/**',
       '**/.react-router/**',
       '**/.wrangler/**',
-      'src/**',
-      'svelte.config.js',
-      'worker-configuration.d.ts',
     ],
   },
 );

@@ -1,6 +1,8 @@
 import type { CSSProperties, ReactElement } from 'react';
 import { useEffect, useState } from 'react';
 
+import styles from '../our-work.module.css';
+
 interface StarDescriptor {
   size: number;
   left: number;
@@ -35,7 +37,7 @@ export function StarField(): ReactElement {
   }, []);
 
   return (
-    <div className="stars" id="stars">
+    <div className={styles.stars} id="stars">
       {stars.map((star, index) => {
         const style: StarStyle = {
           width: star.size,

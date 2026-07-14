@@ -2,6 +2,7 @@ import type { KeyboardEvent } from 'react';
 
 import type { OurWorkTabId } from '../content';
 import { OUR_WORK_TABS } from '../content';
+import styles from '../our-work.module.css';
 
 interface OurWorkTabsProps {
   activeTab: OurWorkTabId;
@@ -39,10 +40,10 @@ export function OurWorkTabs({ activeTab, onChange }: OurWorkTabsProps) {
   }
 
   return (
-    <section className="tab-shell" aria-label="Our Work categories">
-      <div className="container">
+    <section className={styles['tab-shell']} aria-label="Our Work categories">
+      <div className={styles.container}>
         <div
-          className="tab-list"
+          className={styles['tab-list']}
           role="tablist"
           aria-label="Our Work categories"
           tabIndex={-1}
@@ -51,7 +52,7 @@ export function OurWorkTabs({ activeTab, onChange }: OurWorkTabsProps) {
           {OUR_WORK_TABS.map((tab) => (
             <button
               id={`tab-${tab.id}`}
-              className={activeTab === tab.id ? 'active' : undefined}
+              className={activeTab === tab.id ? styles.active : undefined}
               type="button"
               role="tab"
               aria-selected={activeTab === tab.id}
@@ -60,8 +61,8 @@ export function OurWorkTabs({ activeTab, onChange }: OurWorkTabsProps) {
               onClick={() => onChange(tab.id)}
               key={tab.id}
             >
-              <span className="tab-label">{tab.label}</span>
-              <span className="tab-desc">{tab.desc}</span>
+              <span className={styles['tab-label']}>{tab.label}</span>
+              <span className={styles['tab-desc']}>{tab.desc}</span>
             </button>
           ))}
         </div>

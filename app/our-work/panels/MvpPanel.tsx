@@ -1,24 +1,25 @@
 import type { ReactElement } from 'react';
 
 import { launchMetrics, mvpKicks, outOfScope, scopeGroups } from '../content';
+import styles from '../our-work.module.css';
 
 export function MvpPanel(): ReactElement {
   return (
     <section
-      className="ow-section tab-panel"
+      className={`${styles['ow-section']} ${styles['tab-panel']}`}
       id="panel-mvp"
       role="tabpanel"
       aria-labelledby="tab-mvp"
     >
-      <div className="container">
-        <p className="sec-label">kosmo-docs · MVP Scope</p>
-        <h2 className="sec-title">MVP 범위</h2>
+      <div className={styles.container}>
+        <p className={styles['sec-label']}>kosmo-docs · MVP Scope</p>
+        <h2 className={styles['sec-title']}>MVP 범위</h2>
 
-        <p className="subsec-label">Must — 이것 때문에 사용자가 옵니다</p>
-        <div className="feature-grid">
+        <p className={styles['subsec-label']}>Must — 이것 때문에 사용자가 옵니다</p>
+        <div className={styles['feature-grid']}>
           {mvpKicks.map((item) => (
-            <article className="feature-card" key={item.title}>
-              <div className="feature-tags">
+            <article className={styles['feature-card']} key={item.title}>
+              <div className={styles['feature-tags']}>
                 {item.tags.map((tag) => (
                   <span key={tag}>{tag}</span>
                 ))}
@@ -29,31 +30,31 @@ export function MvpPanel(): ReactElement {
           ))}
         </div>
 
-        <p className="subsec-label">기능 범위 (Must 기준)</p>
-        <div className="scope-grid">
+        <p className={styles['subsec-label']}>기능 범위 (Must 기준)</p>
+        <div className={styles['scope-grid']}>
           {scopeGroups.map(([title, body]) => (
-            <div className="scope-item" key={title}>
-              <p className="scope-title">{title}</p>
+            <div className={styles['scope-item']} key={title}>
+              <p className={styles['scope-title']}>{title}</p>
               <p>{body}</p>
             </div>
           ))}
         </div>
 
-        <p className="subsec-label">Out of Scope — 이번 사이클에서 명시적으로 제외</p>
-        <div className="oos-grid">
+        <p className={styles['subsec-label']}>Out of Scope — 이번 사이클에서 명시적으로 제외</p>
+        <div className={styles['oos-grid']}>
           {outOfScope.map((item) => (
-            <div className="oos-item" key={item}>
-              <span className="oos-x">✕</span>
+            <div className={styles['oos-item']} key={item}>
+              <span className={styles['oos-x']}>✕</span>
               <span>{item}</span>
             </div>
           ))}
         </div>
 
-        <p className="subsec-label">MVP 성공 지표</p>
-        <div className="metrics-panel">
-          <div className="metric-list">
+        <p className={styles['subsec-label']}>MVP 성공 지표</p>
+        <div className={styles['metrics-panel']}>
+          <div className={styles['metric-list']}>
             {launchMetrics.map(([label, value]) => (
-              <div className="metric-row" key={label}>
+              <div className={styles['metric-row']} key={label}>
                 <span>{label}</span>
                 <strong>{value}</strong>
               </div>

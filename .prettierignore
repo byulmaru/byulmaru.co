@@ -5,15 +5,12 @@ yarn.lock
 bun.lock
 bun.lockb
 
-# Miscellaneous
-/static/
-
 # Generated output
 /.react-router/
 /build/
-/worker-configuration.d.ts
 
-# Migration inputs and planning artifacts
-/src/
-/svelte.config.js
+# Planning artifacts
 /docs/superpowers/
+
+# Mechanically preserved from the original Svelte scoped style
+/app/our-work/our-work.module.css

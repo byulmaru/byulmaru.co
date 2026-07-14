@@ -9,6 +9,12 @@ export default defineConfig({
     },
   },
   test: {
+    css: {
+      include: [/\.css$/],
+      modules: {
+        classNameStrategy: 'scoped',
+      },
+    },
     environment: 'jsdom',
     globals: true,
     passWithNoTests: true,

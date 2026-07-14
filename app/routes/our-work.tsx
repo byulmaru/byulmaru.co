@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import { OurWorkTabs } from '../our-work/components/OurWorkTabs';
 import type { OurWorkTabId } from '../our-work/content';
+import styles from '../our-work/our-work.module.css';
 import { ArchitecturePanel } from '../our-work/panels/ArchitecturePanel';
 import { DataOpsPanel } from '../our-work/panels/DataOpsPanel';
 import { JourneyPanel } from '../our-work/panels/JourneyPanel';
@@ -26,7 +27,7 @@ export default function OurWork() {
   const ActivePanel = PANELS[activeTab];
 
   return (
-    <div className="our-work-page">
+    <div className={styles['our-work-page']}>
       <OurWorkTabs activeTab={activeTab} onChange={setActiveTab} />
       {activeTab === 'overview' ? (
         <div role="tabpanel" id="panel-overview" aria-labelledby="tab-overview" key={activeTab}>
