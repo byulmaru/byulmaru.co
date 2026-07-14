@@ -1,0 +1,23 @@
+import { fileURLToPath, URL } from 'node:url';
+
+import { defineConfig } from 'vitest/config';
+
+export default defineConfig({
+  resolve: {
+    alias: {
+      '~': fileURLToPath(new URL('./app', import.meta.url)),
+    },
+  },
+  test: {
+    css: {
+      include: [/\.css$/],
+      modules: {
+        classNameStrategy: 'scoped',
+      },
+    },
+    environment: 'jsdom',
+    globals: true,
+    passWithNoTests: true,
+    setupFiles: ['./app/test/setup.ts'],
+  },
+});
