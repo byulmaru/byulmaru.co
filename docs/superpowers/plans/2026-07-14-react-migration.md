@@ -329,12 +329,12 @@ av commit -A -m "feat: Our Work 탭과 별 효과를 React로 전환"
 it('preserves overview sections and item counts', async () => {
   const { container } = render(<OverviewPanel />);
   expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('트위터를 대체할우리만의 SNS를 만듭니다');
-  expect(container.querySelectorAll('.reason-card')).toHaveLength(4);
-  expect(container.querySelectorAll('.build-card')).toHaveLength(6);
-  expect(container.querySelectorAll('.user-card')).toHaveLength(3);
-  expect(container.querySelectorAll('.stat-chip')).toHaveLength(6);
-  expect(container.querySelectorAll('.insight-card')).toHaveLength(4);
-  expect(container.querySelectorAll('.pain-table tbody tr')).toHaveLength(9);
+  expect(container.querySelectorAll(`.${styles['reason-card']}`)).toHaveLength(4);
+  expect(container.querySelectorAll(`.${styles['build-card']}`)).toHaveLength(6);
+  expect(container.querySelectorAll(`.${styles['user-card']}`)).toHaveLength(3);
+  expect(container.querySelectorAll(`.${styles['stat-chip']}`)).toHaveLength(6);
+  expect(container.querySelectorAll(`.${styles['insight-card']}`)).toHaveLength(4);
+  expect(container.querySelectorAll(`.${styles['pain-table']} tbody tr`)).toHaveLength(9);
 });
 ```
 
@@ -377,15 +377,15 @@ av commit -A -m "feat: Our Work 개요 콘텐츠를 React로 전환"
 ```tsx
 it('preserves the four remaining panels', () => {
   const cases = [
-    [<MvpPanel />, 'MVP 범위', '.feature-card', 4],
-    [<JourneyPanel />, '사용자 여정', '.journey-item', 6],
-    [<ArchitecturePanel />, '시스템 아키텍처', '.service-node', 9],
-    [<DataOpsPanel />, '데이터 모델', '.schema-card', 8],
+    [<MvpPanel />, 'MVP 범위', styles['feature-card'], 4],
+    [<JourneyPanel />, '가입부터 연합, 탐색, 통합 피드까지의 핵심 여정', styles['journey-item'], 6],
+    [<ArchitecturePanel />, 'Inner Architecture', `${styles['arch-node']}.${styles.domain}`, 9],
+    [<DataOpsPanel />, 'DB Schema', styles['schema-card'], 8],
   ] as const;
   for (const [panel, title, selector, count] of cases) {
     const { container, unmount } = render(panel);
     expect(screen.getByText(title)).toBeVisible();
-    expect(container.querySelectorAll(selector)).toHaveLength(count);
+    expect(container.querySelectorAll(`.${selector}`)).toHaveLength(count);
     unmount();
   }
 });
