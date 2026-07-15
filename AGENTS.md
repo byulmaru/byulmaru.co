@@ -12,8 +12,9 @@
 
 ## Team Site Design System
 
-- Before changing the team site's Figma design, UI, or frontend, read `docs/design-explorations/04-night-editorial-hybrid/DESIGN.md` and use it as the canonical design-system reference.
-- Follow that document for color tokens, typography, layout, components, header behavior, logo assets, and the fixed footer structure.
+- Before changing the team site's Figma design, UI, or frontend, read `design-system/MASTER.md` and use it as the canonical design-system reference.
+- Then read `design-system/pages/[page].md` when it exists. A page file overrides the master only where it is explicit.
+- Follow those documents for color tokens, typography, layout, components, effects, header behavior, logo assets, and the fixed footer structure.
 - If a requested change intentionally diverges from the design system, explain the affected rule and get user confirmation before implementing it.
 
 ## `package.json` Changes
