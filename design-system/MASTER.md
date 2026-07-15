@@ -165,7 +165,9 @@ Use an 8px base rhythm with 4px only for optical correction.
 
 ### Footer
 
-- Preserve a full-width top hairline, Korean team logo and current information architecture.
+- Preserve a full-width top hairline, Korean team logo and the fixed navigation order: `About Team`, `About us`, `Our Work`.
+- Header and Footer navigation collections must be defined separately. Changing the Header to `Home`, `Our Work`, `About Us` must not reorder or relabel the Footer navigation.
+- The current frontend passes one navigation collection to both components; implementation of this system must split that collection before applying the Header order.
 - Keep unconfirmed copyright, license, or government-support claims as placeholders until exact wording and links are approved.
 
 ## Effects and art direction
