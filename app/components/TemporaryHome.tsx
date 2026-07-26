@@ -9,9 +9,19 @@ export function TemporaryHome() {
         </header>
 
         <main className="flex flex-1 items-center py-16 sm:py-20">
-          <div className="flex max-w-[48rem] flex-col items-start">
+          <div className="flex max-w-[48rem] flex-col items-start lg:max-w-[64rem]">
             <h1 className="text-balance font-['SUIT_Variable','SUIT',sans-serif] text-[clamp(2.75rem,7vw,5.5rem)] leading-[0.98] font-[770] tracking-[-0.045em]">
-              별마루는 지금 새 단장을 준비하고 있어요.
+              <span className="block w-fit whitespace-nowrap" data-heading-phrase>
+                별마루는 지금
+              </span>{' '}
+              <span className="block">
+                <span className="inline-block whitespace-nowrap" data-heading-phrase>
+                  새 단장을
+                </span>{' '}
+                <span className="inline-block whitespace-nowrap" data-heading-phrase>
+                  준비하고 있어요.
+                </span>
+              </span>
             </h1>
 
             <p className="mt-8 max-w-[42rem] font-['Pretendard_Variable','Pretendard',sans-serif] text-[clamp(1.0625rem,2vw,1.25rem)] leading-[1.7] tracking-[-0.008em] text-[var(--color-text-secondary)]">
