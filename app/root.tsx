@@ -61,9 +61,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
         <h1 className="font-['SUIT_Variable','SUIT',sans-serif] text-4xl leading-tight font-bold">
           {message}
         </h1>
-        <p className="mt-6 text-lg leading-relaxed text-[var(--color-text-secondary)]">
-          {details}
-        </p>
+        <p className="mt-6 text-lg leading-relaxed text-[var(--color-text-secondary)]">{details}</p>
       </div>
     </main>
   );
