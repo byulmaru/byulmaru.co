@@ -21,7 +21,7 @@ for (const [path, title] of [
     throw new Error(`${path} is missing ${title}`);
   }
 
-  if (!html.includes('<html lang="en">')) {
-    throw new Error(`${path} does not preserve the original document language`);
+  if (!html.includes('<html lang="ko">')) {
+    throw new Error(`${path} must declare Korean as the document language`);
   }
 }

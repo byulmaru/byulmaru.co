@@ -1,4 +1,5 @@
 import './app.css';
+import './editorial.css';
 
 import type { ReactNode } from 'react';
 import {
@@ -17,24 +18,25 @@ import { Header } from './components/Header';
 import { RouteAccessibility } from './components/RouteAccessibility';
 
 const navItems = [
-  { href: '/', label: 'About Team' },
-  { href: '/about-us', label: 'About us' },
+  { href: '/', label: 'Home' },
+  { href: '/about-us', label: 'About Us' },
   { href: '/our-work', label: 'Our Work' },
 ] as const satisfies readonly NavItem[];
 
 export function Layout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="ko">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="text-scale" content="scale" />
         <link rel="icon" href="/favicon.ico" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@500&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;700&display=swap"
-          rel="stylesheet"
+          href="/figma/SUIT-Variable.woff2"
+          rel="preload"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
         />
         <Meta />
         <Links />

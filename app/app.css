@@ -2,16 +2,219 @@
 
 html {
   min-height: 100%;
-  background: #22223b;
+  background: #15111f;
 }
 
 body {
   min-height: 100%;
   margin: 0;
-  background:
-    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 32%),
-    linear-gradient(180deg, #a9a8b6 0%, #77778f 36%, #4a4a65 72%, #22223b 100%);
-  color: #171723;
-  font-family: 'Noto Sans KR', system-ui, sans-serif;
-  background-attachment: fixed;
+  background: #15111f;
+  color: #f7f3ed;
+  font-family: 'Pretendard Variable', 'Noto Sans KR', system-ui, sans-serif;
+}
+
+/* Approved FINAL shared content rails. */
+:root {
+  --site-canvas: #15111f;
+  --site-footer: #191329;
+  --site-text: #f7f3ed;
+  --site-secondary: #c9c0cf;
+  --site-action: #ddf95b;
+  --site-border: #40344a;
+  --site-gutter: 24px;
+}
+
+.site-container {
+  width: min(100%, 1440px);
+  margin-inline: auto;
+  padding-inline: var(--site-gutter);
+}
+.site-header,
+.site-footer {
+  color: var(--site-text);
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+.site-header {
+  background: var(--site-canvas);
+}
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 72px;
+  gap: 12px;
+}
+.site-logo {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  min-height: 44px;
+}
+.site-logo img {
+  width: 112px;
+  height: 40px;
+  object-fit: contain;
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.desktop-nav {
+  display: none;
+}
+.site-header ul,
+.site-footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.site-header a,
+.site-footer a {
+  text-decoration: none;
+}
+.site-header nav a,
+.site-footer li a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--site-secondary);
+  font-size: 15px;
+}
+.site-header nav a[aria-current='page'] {
+  color: var(--site-action);
+}
+.site-header nav a[aria-current='page']:not([href='/']) {
+  color: #ff6f61;
+}
+.site-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 52px;
+  padding: 14px 24px;
+  background: var(--site-action);
+  color: var(--site-canvas);
+  border-radius: 8px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.header-news {
+  min-height: 44px;
+  padding: 10px 12px;
+  font-size: 15px;
+  white-space: nowrap;
+}
+.menu-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: var(--site-text);
+  cursor: pointer;
+  border-radius: 8px;
+}
+.mobile-nav {
+  padding-block: 8px 24px;
+}
+.mobile-nav a {
+  width: 100%;
+}
+.site-footer {
+  background: var(--site-footer);
+  border-top: 1px solid var(--site-border);
+  padding-block: 48px 24px;
+}
+.footer-columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+.footer-tagline {
+  margin-top: 16px;
+  font-family: 'SUIT Variable', 'Noto Sans KR', sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.footer-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #63d8ff;
+  letter-spacing: 0.04em;
+  margin-bottom: 16px;
+}
+.contact-label {
+  color: #ff6f61;
+}
+.footer-bottom {
+  border-top: 1px solid var(--site-border);
+  margin-top: 40px;
+  padding-top: 24px;
+  font-size: 13px;
+  color: var(--site-secondary);
+}
+:where(.site-header, .site-footer) :where(a, button):focus-visible {
+  outline: 2px solid var(--site-action);
+  outline-offset: 4px;
+}
+@media (hover: hover) {
+  .site-header nav a:hover,
+  .site-footer li a:hover {
+    color: var(--site-text);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .site-button:hover {
+    filter: brightness(0.92);
+  }
+  .menu-toggle:hover {
+    background: #ffffff12;
+  }
+}
+@media (min-width: 768px) {
+  :root {
+    --site-gutter: 64px;
+  }
+  .header-row {
+    min-height: 96px;
+  }
+  .site-logo img {
+    width: 174px;
+    height: 58px;
+  }
+  .header-actions,
+  .desktop-nav ul {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+  }
+  .desktop-nav {
+    display: block;
+  }
+  .menu-toggle,
+  .mobile-nav {
+    display: none;
+  }
+  .footer-columns {
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 48px;
+  }
+  .footer-tagline {
+    font-size: 24px;
+  }
+}
+@media (min-width: 1280px) {
+  :root {
+    --site-gutter: 96px;
+  }
+  .header-row {
+    min-height: 114px;
+    padding-block: 32px 24px;
+  }
+  .site-footer {
+    padding-block: 64px 32px;
+  }
 }
