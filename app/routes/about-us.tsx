@@ -7,7 +7,25 @@ import { team } from '~/components/team';
 import { useAboutSnap } from '~/components/useAboutSnap';
 
 export function meta() {
-  return [{ title: 'About us' }];
+  const title = '별마루 팀 소개 | 코스모를 만드는 사람들';
+  const description =
+    '별마루는 동인 창작 문화를 직접 향유해 온 세 사람이 모여, 오래 머물 수 있는 SNS 코스모를 만드는 팀입니다.';
+  const url = 'https://byulmaru.co/about-us';
+
+  return [
+    { title },
+    { name: 'description', content: description },
+    { property: 'og:title', content: title },
+    { property: 'og:description', content: description },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:url', content: url },
+    { property: 'og:image', content: 'https://byulmaru.co/og-image.png' },
+    { name: 'twitter:card', content: 'summary_large_image' },
+  ];
+}
+
+export function links() {
+  return [{ rel: 'canonical', href: 'https://byulmaru.co/about-us' }];
 }
 function Profile({ member }: { member: (typeof team)[number] }) {
   const [expanded, setExpanded] = useState(false);
