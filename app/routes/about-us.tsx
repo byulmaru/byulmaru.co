@@ -1,6 +1,8 @@
+import { motion, useReducedMotion } from 'motion/react';
 import { useState } from 'react';
 import { Link } from 'react-router';
 
+import { AvatarTip, ConvergingPaths, ExperienceTimeline } from '~/components/AboutMotion';
 import { team } from '~/components/team';
 import { useAboutSnap } from '~/components/useAboutSnap';
 
@@ -9,11 +11,12 @@ export function meta() {
 }
 function Profile({ member }: { member: (typeof team)[number] }) {
   const [expanded, setExpanded] = useState(false);
+  const reduced = useReducedMotion();
   return (
     <article className={`profile section-rule ${member.id} ${expanded ? 'expanded' : ''}`}>
       <div className="profile-introduction">
         <div className="profile-identity">
-          <img src={member.avatar} alt="" loading="lazy" />
+          <AvatarTip member={member} />
           <div>
             <h2>{member.name}</h2>
             <p className="profile-role">{member.role}</p>
@@ -30,10 +33,20 @@ function Profile({ member }: { member: (typeof team)[number] }) {
               <p key={p}>{p}</p>
             ))}
           </div>
-          <p className="profile-tags desktop-copy">{member.tags}</p>
+          {member.id === 'yuki' ? (
+            <ExperienceTimeline />
+          ) : (
+            <p className="profile-tags desktop-copy">{member.tags}</p>
+          )}
         </div>
       </div>
-      <div className="interview">
+      <motion.div
+        className="interview"
+        initial={reduced ? false : { y: 16 }}
+        whileInView={{ y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: reduced ? 0 : 0.85, ease: [0.22, 1, 0.36, 1] }}
+      >
         <h3>Q. {member.question}</h3>
         <p className="interview-excerpt">{member.excerpt}</p>
         <div className="interview-answer" id={`${member.id}-answer`}>
@@ -50,7 +63,7 @@ function Profile({ member }: { member: (typeof team)[number] }) {
           {expanded ? '인터뷰 접기' : '인터뷰 더 읽기'}
           <span aria-hidden="true">{expanded ? '−' : '+'}</span>
         </button>
-      </div>
+      </motion.div>
     </article>
   );
 }
@@ -72,7 +85,9 @@ export default function AboutUs() {
             경험에서 출발해, 좋아하는 것을 편안하게 이어갈 수 있는 공간을 함께 만들고 있습니다.
           </p>
         </div>
-        <img src="/figma/about-painter.png" alt="" />
+        <div className="about-hero-art" aria-hidden="true">
+          <img src="/figma/about-painter.png" alt="" />
+        </div>
       </section>
       <section className="site-container profiles" aria-label="팀원 소개">
         {team.map((member) => (
@@ -96,7 +111,7 @@ export default function AboutUs() {
             </a>
           </div>
         </div>
-        <img src="/figma/about-navigate.png" alt="" loading="lazy" />
+        <ConvergingPaths />
       </section>
     </div>
   );

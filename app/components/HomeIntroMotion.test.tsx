@@ -1,11 +1,28 @@
 import { cleanup, render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router';
 import { afterEach, expect, it, vi } from 'vitest';
 
+import Home from '../routes/home';
 import { JourneyPreview, OriginQuote } from './HomeIntroMotion';
 
 afterEach(() => {
   cleanup();
   vi.unstubAllGlobals();
+});
+
+it('keeps the three member introductions without decorative interest cards', () => {
+  const { container } = render(
+    <MemoryRouter>
+      <Home />
+    </MemoryRouter>,
+  );
+  const rows = container.querySelectorAll('.team-row');
+  expect(rows).toHaveLength(3);
+  expect(screen.queryAllByRole('group', { name: /의 관심사$/ })).toHaveLength(0);
+  rows.forEach((row) => {
+    expect(row.querySelector('img')).toBeVisible();
+    expect(row.querySelector('h3')).toBeVisible();
+  });
 });
 
 it('keeps the quote and all preview images visible with reduced motion', () => {

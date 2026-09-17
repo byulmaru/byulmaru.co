@@ -1,0 +1,227 @@
+.operating-notes {
+  position: relative;
+  display: grid;
+  gap: 12px;
+  padding: 24px 0;
+}
+.notes-art {
+  position: absolute;
+  right: 0;
+  bottom: -24px;
+  width: 70%;
+  opacity: 0.25;
+  pointer-events: none;
+}
+.operating-notes blockquote {
+  position: relative;
+  margin: 0;
+  padding: 20px 24px;
+  border: 1px solid var(--site-border);
+  border-radius: 12px;
+  background: rgb(36 27 48 / 80%);
+}
+.operating-notes blockquote:nth-of-type(2) {
+  margin-inline: 24px -8px;
+}
+.operating-notes blockquote > span {
+  color: var(--site-secondary);
+  font-size: 12px;
+}
+.editorial .operating-notes p {
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 8px 0;
+}
+.operating-notes cite {
+  font-size: 12px;
+  font-style: normal;
+  color: var(--site-secondary);
+}
+.work-switch-demo,
+.composer-demo {
+  min-width: 0;
+  width: 100%;
+  justify-self: end;
+}
+.work-switch-demo {
+  position: relative;
+  padding-block: 12px 32px;
+}
+.switch-demo-feed {
+  overflow: hidden;
+  background: white;
+  color: #34343d;
+  border-radius: 8px;
+  padding: 16px;
+}
+.demo-toolbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 13px;
+  padding-bottom: 160px;
+}
+.switch-demo-feed > img,
+.switch-context img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 6px;
+}
+.switch-context {
+  opacity: 0.45;
+  margin-top: 20px;
+  display: grid;
+  gap: 16px;
+}
+.switch-demo-menu {
+  position: absolute;
+  top: 52px;
+  right: 16px;
+  width: min(280px, 78%);
+  padding: 8px;
+  border-radius: 12px;
+  background: white;
+  color: #34343d;
+  box-shadow: 0 4px 18px #15111f30;
+  border: 1px solid #dedce5;
+}
+.switch-demo-menu button {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  text-align: left;
+  gap: 10px;
+  min-height: 58px;
+  padding: 8px;
+  border: 0;
+  background: none;
+  font-size: 13px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.switch-demo-menu button > img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+.switch-demo-menu small {
+  display: block;
+  font-size: 11px;
+  margin-top: 3px;
+}
+.switch-demo-menu button > span:last-child {
+  margin-left: auto;
+}
+.demo-selection {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  border-radius: 8px;
+  background: #f1eff8;
+}
+.demo-account-note {
+  display: block;
+  font-size: 11px;
+  padding: 10px 8px 4px;
+  color: #72717e;
+}
+.work-demo-hint {
+  display: block;
+  text-align: right;
+  color: var(--site-secondary);
+  font-size: 12px;
+  margin-top: 12px;
+}
+.work-demo-controls button {
+  min-height: 44px;
+  padding: 8px 14px;
+  color: var(--site-text);
+  background: transparent;
+  border: 1px solid var(--site-border);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+}
+.work-demo-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.work-demo-controls button[aria-pressed='true'] {
+  border-color: var(--site-secondary);
+  background: rgb(99 216 255 / 8%);
+}
+.composer-demo {
+  max-width: 520px;
+}
+.composer-demo-card {
+  position: relative;
+  container-type: inline-size;
+  aspect-ratio: 520 / 401;
+  border-radius: 8px;
+  background: white;
+  color: #34343d;
+}
+.composer-demo-card > img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.editorial .composer-sample-copy {
+  position: absolute;
+  left: 4.615%;
+  right: 4.615%;
+  top: 43.64%;
+  bottom: 18%;
+  margin: 0;
+  background: white;
+  white-space: pre-line;
+  font-size: 2.692cqw;
+  line-height: 1.5;
+  color: #34343d;
+}
+.composer-doodle {
+  position: absolute;
+  left: 4.615%;
+  top: 54%;
+  display: block;
+  width: 43%;
+  border-radius: 8px;
+}
+.work-page :is(.switch-demo-menu button, .work-demo-controls button):focus-visible {
+  outline: 2px solid #63d8ff;
+  outline-offset: 3px;
+}
+@media (max-width: 767px) {
+  .operating-notes blockquote {
+    padding: 16px;
+  }
+  .operating-notes blockquote:nth-of-type(2) {
+    margin-inline: 12px 0;
+  }
+  .editorial .operating-notes p {
+    font-size: 14px;
+  }
+  .work-switch-demo {
+    max-width: 440px;
+    justify-self: center;
+  }
+  .switch-demo-menu {
+    right: 8px;
+  }
+  .demo-toolbar {
+    padding-bottom: 196px;
+    font-size: 11px;
+  }
+  .work-demo-controls {
+    gap: 6px;
+  }
+  .work-demo-controls button {
+    padding-inline: 10px;
+    font-size: 12px;
+  }
+}

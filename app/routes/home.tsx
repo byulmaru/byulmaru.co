@@ -1,8 +1,11 @@
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useEffect } from 'react';
 import { Link } from 'react-router';
 
 import { TracingBeam } from '~/components/aceternity/tracing-beam';
 import { JourneyPreview, OriginQuote } from '~/components/HomeIntroMotion';
+import { JourneyMockup } from '~/components/JourneyMockup';
 import { JourneyScenes } from '~/components/JourneyScenes';
 import { PostCarousel } from '~/components/PostCarousel';
 import { team } from '~/components/team';
@@ -41,6 +44,29 @@ const scenes = [
   },
 ];
 export default function Home() {
+  useEffect(() => {
+    if (!window.matchMedia) {
+      return;
+    }
+    gsap.registerPlugin(ScrollTrigger);
+    const media = gsap.matchMedia();
+    media.add('(prefers-reduced-motion: no-preference)', () => {
+      document.querySelectorAll('.home-team .team-row').forEach((row) => {
+        gsap.fromTo(
+          row,
+          { y: 18, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.65,
+            ease: 'power2.out',
+            scrollTrigger: { trigger: row, start: 'top 90%', once: true },
+          },
+        );
+      });
+    });
+    return () => media.revert();
+  }, []);
   useEffect(() => {
     const query = window.matchMedia?.(
       '(min-width: 1280px) and (min-height: 40rem) and (prefers-reduced-motion: no-preference)',
@@ -247,13 +273,11 @@ export default function Home() {
                 loading={scene.id === 'discovery' ? 'eager' : 'lazy'}
               />
             </div>
-            <img
-              className={`product-mockup ${scene.image}`}
-              src={`/figma/${scene.image}.png`}
+            <JourneyMockup
+              image={scene.image}
               alt={scene.alt}
               width={scene.width}
               height={scene.height}
-              loading={scene.id === 'discovery' ? 'eager' : 'lazy'}
             />
           </section>
         ))}

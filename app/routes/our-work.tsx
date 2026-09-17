@@ -1,4 +1,12 @@
+import '~/work-motion.css';
+
 import { PostCarousel } from '~/components/PostCarousel';
+import {
+  ComposerDemo,
+  OfficialProfilePreview,
+  OperatingNotes,
+  ProfileSwitcherDemo,
+} from '~/components/WorkMotion';
 
 export function meta() {
   return [{ title: 'Our Work — 별마루' }];
@@ -41,7 +49,7 @@ export default function OurWork() {
               다시 설계하고 있습니다.
             </p>
           </div>
-          <img src="/figma/work-nature.png" alt="" loading="lazy" />
+          <OperatingNotes />
         </div>
       </section>
       <section className="site-container work-chapter">
@@ -60,14 +68,7 @@ export default function OurWork() {
             개발 중인 화면으로, 정식 출시 시 일부 UI와 기능이 변경될 수 있습니다.
           </p>
         </div>
-        <picture className="product-mockup switcher">
-          <source media="(max-width: 767px)" srcSet="/figma/profile-switcher-mobile.png" />
-          <img
-            src="/figma/profile-switcher.png"
-            alt="모래, 모래의 게임계, 모래의 일상계 게시물 위에 겹쳐 열린 프로필 선택창"
-            loading="lazy"
-          />
-        </picture>
+        <ProfileSwitcherDemo />
       </section>
       <section className="work-tinted">
         <div className="site-container work-chapter reverse">
@@ -106,12 +107,7 @@ export default function OurWork() {
             보여줄지도 정할 수 있습니다.
           </p>
         </div>
-        <img
-          className="product-mockup composer"
-          src="/figma/composer.png"
-          alt="이야기를 작성하고 공개 범위를 설정하는 코스모 글쓰기"
-          loading="lazy"
-        />
+        <ComposerDemo />
       </section>
       <section className="work-tinted">
         <div className="site-container work-bridge federation">
@@ -142,11 +138,7 @@ export default function OurWork() {
             코스모 소식 보기
           </a>
         </div>
-        <a
-          className="official-profile-preview"
-          href="https://kos.moe/@kosmo"
-          aria-label="코스모 공식 계정 방문하기"
-        >
+        <OfficialProfilePreview>
           <img
             className="official-profile-capture"
             src="/figma/kosmo-official-profile.png"
@@ -155,14 +147,7 @@ export default function OurWork() {
             alt="코스모 공식 프로필 캡처 — @kosmo, 동인 창작 문화 향유자를 위한 SNS"
             loading="lazy"
           />
-          <img
-            className="official-profile-logo"
-            src="/figma/kosmo-mark.svg"
-            alt=""
-            aria-hidden="true"
-            loading="lazy"
-          />
-        </a>
+        </OfficialProfilePreview>
       </section>
     </div>
   );
