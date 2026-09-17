@@ -797,8 +797,11 @@
     gap: 40px;
   }
   .home-hero {
-    min-height: 500px;
-    padding-block: 24px;
+    min-height: 0;
+    padding-block: 48px 88px;
+  }
+  .home-team {
+    padding-block: 48px;
   }
   .origin {
     min-height: 432px;
@@ -1034,8 +1037,8 @@
   .team-row .profile-role {
     font-size: 13px;
   }
-  .team-row p {
-    font-size: 13px;
+  .team-row p:not(.profile-role) {
+    font-size: 15px;
   }
   .closing {
     min-height: 0;
