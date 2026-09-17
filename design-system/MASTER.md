@@ -5,6 +5,17 @@
 
 ## How to use this system
 
+### Approved implementation amendments — 2026-09-17
+
+The user-approved FINAL implementation and subsequent motion/layout decisions are
+preserved in [the approved amendment record](../docs/design-explorations/04-night-editorial-hybrid/DESIGN.md).
+Its dated amendments override conflicting defaults in this master and the page
+files, including the shared Home → About Us → Our Work navigation, responsive
+gutters/type, full three-page site, Silk/star background and approved motion.
+The older comparison rules below that record's amendments remain historical.
+The temporary renovation screen and route redirects are retired; do not restore
+them when merging the main branch.
+
 1. Read this file before changing the team site's Figma design, UI, or frontend.
 2. Then read `design-system/pages/[page].md` when it exists. Page rules override this file only where they are explicit.
 3. Treat unspecified decoration as off. Add an exception only when the design brief names it and the exception satisfies the guardrails below.
