@@ -6,6 +6,54 @@ These user-approved decisions supersede the corresponding original rules below. 
 
 ### Implementation order and deferred background effect
 
+- Approved Home motion trial (2026-09-17): Journey Intro adds three overlapping existing product-image fragments, entering once with React Bits AnimatedContent. Origin reasons use an Aceternity Tracing Beam coral hairline and three nodes; its quote uses React Bits ScrollReveal on two Korean phrases, without blur/rotation. Preserve copy, hero playback and existing snap/Journey choreography. Mobile stacks the preview below copy; reduced motion shows a static, readable composition. No generated images or Figma changes.
+
+- Surface opacity follow-up: increase About interview panels and Our Work tinted sections to 50% background alpha without adding top/bottom borders. Retain existing section rules, content opacity and background effects.
+
+- Surface opacity refinement: increase About interview panels and Our Work tinted sections from 10% to 30% background alpha; preserve content opacity, footer and all animation settings.
+
+- Increase sparkle frequency by halving the twinkle timing range to 1.5–3 (roughly 9–19 seconds between pulses per animated star), keeping independent phases, density and meteor timing. Make About interview panels and Our Work tinted section backgrounds #241B30 at 10% alpha, without lowering content opacity. Keep footer, controls and product mockups opaque.
+
+- Restore cyan #63D8FF with magenta #F47DAA Silk. Stars remain 70% white with 15% pale cyan and 15% pale pink; the existing 35% twinkling subset gets independent random phases and brief soft glow pulses rather than synchronized breathing. Keep density, masks, opacity and meteor frequency unchanged; reduced motion retains static tinted stars without glow.
+
+- Latest Silk palette: replace the cyan base with deeper purple #8054D9 and restore the second layer to pink/magenta #F47DAA. Preserve both opacities, masks, scale, speed and star/meteor settings.
+
+- Milky Way color/direction refinement: replace the pink Silk layer with blue-leaning lavender #A99BE8; preserve cyan, opacity, masks, scale and speed. Meteors now originate along the top edge and travel diagonally downward (45/135 degrees), never from the bottom upward. Keep density and cadence unchanged.
+
+- Star visibility correction: keep density and meteor cadence unchanged, increase star diameters from approximately 1px to 1.3–2.4px and the shared star/meteor layer opacity from .45 to .75. Preserve Silk and its masks.
+
+- Restore stars using the actual Aceternity UI Stars Background and Shooting Stars registry components. Overlay the existing Silk with .000065 star density, .45 opacity and occasional white/cyan meteors at 8–14-second intervals. Stars occupy the full viewport independently of the Silk mask. Pause twinkling and remove meteors while hidden or reduced motion is requested; clean up timers on unmount. Preserve current Silk settings.
+
+- Silk pattern sizing: enlarge the visible folds by approximately 1.1x using scales .858/1.001 (previous .9/1.05 divided by sqrt(1.1), since the upstream shader applies scale twice). Preserve masks, opacity, colors and speed.
+
+- Silk density/edge refinement: reduce scales to .9/1.05 for larger, fewer folds. Keep central crossing masks and add a stationary horizontal fade around the combined background: outer 8% fully transparent, 18% edge positions at 13% mask alpha, central 40–60% fully revealed. This keeps both side edges dark throughout mask drift without changing Silk colors, opacity or speed.
+
+- Silk mask softening: retain opposing 116/64-degree masks but broaden their reveal. Keep mask alpha fully opaque across the central 38–62% region, gradually fade through 53% and 20% alpha toward the outer edges, and reach transparency only at the ends. Preserve Silk opacity, scale, colors and motion; this replaces the narrow-band mask stops above.
+
+- Silk overlap correction: center both feathered bands around the same viewport region, crossing at 116/64 degrees; reduce mask oversizing to 110% so slow drift preserves central overlap. Keep dark margins outside the combined bands rather than between them. Preserve shader, scale, color and opacity.
+
+- Silk band preview: retain the original shader and reveal folds only within two feathered, near-vertical bands with a broad dark interval. Use scales 1.25/1.45 to retain multiple folds within each band, not dense stripes across the whole viewport. Masks drift gently over 26/34 seconds and pause with the existing hidden-tab/reduced-motion state; CSS also disables drift immediately for reduced motion. Preserve cyan/pink .12/.10 opacity, speeds and header/footer treatment.
+
+- Header/background finishing: add an inset 1px bottom divider using the existing border token without changing header height. Increase both Silk layer opacities by two percentage points (cyan .12, pink .10); preserve transparency, colors, motion and the opaque footer.
+
+- Header background refinement: make the shared header transparent so the continuous Silk backdrop extends behind its logo/navigation without a solid horizontal seam. Retain the opaque footer, existing header layout and interaction behavior.
+
+- Latest color/asset refinement: Silk now uses the existing cyan #63D8FF at .10 opacity and pink #F47DAA at .08 opacity; retain vertical folds and current speed/scale. Remove only edge-connected solid canvas matte from the nine decorative PNG exports, preserving their RGB artwork and size, and remove the temporary lighten blending workaround. Mockup screenshots remain unchanged.
+
+- Clarified Silk orientation: the visible folds should stand vertically while moving sideways, not form horizontal bands. The shader's base pattern is diagonal, so both rotations are now centered on -PI/4 with small opposing offsets (+.12/-.12 radians). Preserve speeds 7/-5 and opacity .18/.12. This replaces the prior opposing +/-45-degree trial.
+
+- Silk flow tuning: use opposing +45/-45 degree rotations and speeds 7/-5 so the two diagonal layers visibly flow in opposite directions. Preserve .18/.12 opacity, existing colors, scale and original shader; this supersedes the earlier 2/-1.2 speed and 2.4/.83 rotation values.
+
+- Silk crossing refinement: retain the base rotation at 2.4 radians and set the overlay to .83 radians (about 90 degrees apart rather than the previous nearly parallel orientations). Lower layer opacities to .18/.12; retain color, scale and speed.
+
+- Silk layering refinement: retain the original React Bits shader and cover the viewport with two layers. Base: lavender #8974C7, opacity .30, scale .65, rotation 2.4, speed 2, noise 1.4. Overlay: gray-purple #62558C, opacity .22 with screen blending, scale .85, rotation -.7, speed -1.2, noise 1.1. Increasing shader scale makes the visible pattern smaller than the previous .3 setting. Both layers share visibility/reduced-motion pausing; DPR is capped at 1 to limit the extra rendering cost. Physical-device GPU/battery testing remains outstanding.
+
+- Latest approved preview supersedes the two custom-effect experiments below: remove the custom SVG ribbons/stars and CSS meteors. Use the actual React Bits Silk component and original shader with Three.js/React Three Fiber, full-viewport behind every page. User settings: speed 3, scale 0.3, noiseIntensity 3.1, rotation 2.4, color #5227FF; wrapper opacity 0.5. Local integration only adds lazy client loading, DPR capped at 1.5, hidden/reduced-motion demand rendering, delta clamping and unsupported-WebGL fallback. Preserve the upstream license in app/components/react-bits/LICENSE.md. Aceternity stars/meteors remain a separate next step; do not substitute handmade equivalents. WebGL bundle size and physical-device battery/performance remain tradeoffs to review.
+
+- Shooting-star follow-up: reference the diagonal fading trails in https://ui.aceternity.com/components/shooting-stars-and-stars-background without importing its implementation. Two CSS trails alternate roughly every 8 seconds, each fading out within 1.76 seconds; shorten travel on mobile, inherit hidden-tab suspension, and hide meteors entirely under reduced motion. Keep the existing sparse stars and silk intensity unchanged.
+
+- Background implementation preview: the approved silk + sparse stars direction is now enabled behind all three pages with a shared fixed, pointer-transparent SVG/CSS layer. Two muted purple ribbon layers drift over 28/37 seconds; 26 faint points breathe over 13 seconds. Preserve opaque header/footer and existing content surfaces. Mobile uses one ribbon layer, half the points and lower opacity; reduced-motion uses a static background and hidden tabs pause. No WebGL, additional dependency, generated image, glass panels or floating text groups. Real-device GPU/battery cost remains unverified; tune appearance against the running site before extending the effect.
+
 - Implement the approved FINAL Figma pages first, using the existing React application. Review the running pages before proposing or adding further visual effects. Do not modify Figma for the background effect.
 - Deferred direction: one continuous site-wide background behind the scrolling content, combining a slowly flowing silk-like band with sparse, faint star points. Keep the silk concentrated around a broad, softly feathered central band rather than covering the entire canvas uniformly. Use muted purple, minimal twinkling and readable contrast behind copy; no AI-generated imagery.
 - This effect is not part of the initial Figma implementation. Choose its renderer and tune density, speed and brightness against the running pages later. Mobile quality limits, reduced-motion fallback and actual GPU performance must be checked before enabling it.

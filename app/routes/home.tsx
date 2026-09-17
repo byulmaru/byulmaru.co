@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router';
 
+import { TracingBeam } from '~/components/aceternity/tracing-beam';
+import { JourneyPreview, OriginQuote } from '~/components/HomeIntroMotion';
 import { JourneyScenes } from '~/components/JourneyScenes';
 import { PostCarousel } from '~/components/PostCarousel';
 import { team } from '~/components/team';
@@ -197,13 +199,9 @@ export default function Home() {
               <br className="desktop-break" /> 조금 더 편했으면 하는 순간들이 있었습니다.
               <br className="desktop-break" /> 코스모는 그 아쉬움에서 시작합니다.
             </p>
-            <blockquote>
-              “있었으면 했던 공간을,
-              <br />
-              함께 쓸 수 있는 공간으로.”
-            </blockquote>
+            <OriginQuote />
           </div>
-          <div className="origin-reasons">
+          <TracingBeam>
             <img className="background-art" src="/figma/origin-art.png" alt="" />
             {[
               ['써 보니 아쉬웠던 것', '창작하고 감상을 나누며 느낀 불편에서 시작합니다.'],
@@ -218,20 +216,23 @@ export default function Home() {
                 </div>
               </div>
             ))}
-          </div>
+          </TracingBeam>
         </section>
       </div>
-      <section className="site-container journey-intro copy">
-        <h2>
-          보고, 올리고,
-          <br />
-          말을 건네는 곳.
-        </h2>
-        <p>
-          타임라인에서 새로운 이야기를 만나고, 글과 이미지로 내 이야기를 남깁니다.
-          <br className="desktop-break" /> 마음에 드는 게시물에는 반응을 남기거나 답글로 대화를
-          시작해 보세요.
-        </p>
+      <section className="site-container journey-intro">
+        <div className="copy">
+          <h2>
+            보고, 올리고,
+            <br />
+            말을 건네는 곳.
+          </h2>
+          <p>
+            타임라인에서 새로운 이야기를 만나고, 글과 이미지로 내 이야기를 남깁니다.
+            <br className="desktop-break" /> 마음에 드는 게시물에는 반응을 남기거나 답글로 대화를
+            시작해 보세요.
+          </p>
+        </div>
+        <JourneyPreview />
       </section>
       <JourneyScenes>
         {scenes.map((scene) => (

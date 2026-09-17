@@ -1,0 +1,93 @@
+.site-shell {
+  position: relative;
+  isolation: isolate;
+}
+.ambient-stars {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0.75;
+}
+.ambient-background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--site-canvas);
+}
+.ambient-silk-layer {
+  position: absolute;
+  inset: 0;
+  opacity: 0.12;
+  mask-image: linear-gradient(
+    116deg,
+    transparent 0%,
+    #0003 12%,
+    #0008 25%,
+    #000 38%,
+    #000 62%,
+    #0008 75%,
+    #0003 88%,
+    transparent 100%
+  );
+  mask-size: 110% 100%;
+  mask-repeat: no-repeat;
+  animation: silk-band-drift 26s ease-in-out infinite alternate;
+}
+.ambient-background {
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    transparent 8%,
+    #0002 18%,
+    #0009 30%,
+    #000 40%,
+    #000 60%,
+    #0009 70%,
+    #0002 82%,
+    transparent 92%,
+    transparent 100%
+  );
+}
+.ambient-silk-overlay {
+  opacity: 0.1;
+  mix-blend-mode: screen;
+  mask-image: linear-gradient(
+    64deg,
+    transparent 0%,
+    #0003 12%,
+    #0008 25%,
+    #000 38%,
+    #000 62%,
+    #0008 75%,
+    #0003 88%,
+    transparent 100%
+  );
+  animation-duration: 34s;
+  animation-direction: alternate-reverse;
+}
+@keyframes silk-band-drift {
+  from {
+    mask-position: 0% 50%;
+  }
+  to {
+    mask-position: 100% 50%;
+  }
+}
+.ambient-background[data-paused='true'] .ambient-silk-layer {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ambient-silk-layer {
+    animation: none;
+  }
+}
+@media print {
+  .ambient-background,
+  .ambient-stars {
+    display: none;
+  }
+}

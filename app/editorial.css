@@ -175,6 +175,102 @@
 }
 .journey-intro {
   padding-block: 120px 72px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 64px;
+}
+.quote-phrase {
+  display: block;
+}
+.tracing-reasons {
+  padding-left: 24px;
+}
+.reason-beam {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+}
+.tracing-reasons .origin-reason::before {
+  content: '';
+  position: absolute;
+  left: -18px;
+  top: 39px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ff6f61;
+  border: 2px solid #15111f;
+}
+.journey-preview {
+  position: relative;
+  min-width: 0;
+  width: 100%;
+  max-width: 560px;
+  aspect-ratio: 1.4;
+  justify-self: center;
+  isolation: isolate;
+}
+.journey-preview-card {
+  position: absolute;
+  width: 62%;
+}
+.journey-preview-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 6px solid #fff;
+  border-radius: 12px;
+  box-shadow: 0 12px 32px #08061040;
+}
+.preview-read {
+  left: 3%;
+  top: 2%;
+  transform: rotate(-7deg);
+}
+.journey-preview-card .post-avatar,
+.journey-preview-card .post-quote-avatar {
+  border: 0;
+  border-radius: 50%;
+  background: white;
+  box-shadow: none;
+}
+.preview-post {
+  border: 6px solid white;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 12px 32px #08061040;
+}
+.preview-post > img:first-child {
+  border: 0;
+  border-radius: 6px;
+  box-shadow: none;
+}
+.preview-write {
+  right: 2%;
+  top: 24%;
+  transform: rotate(6deg);
+}
+.preview-reply {
+  left: 6%;
+  bottom: 0;
+  width: 70%;
+  transform: rotate(-3deg);
+}
+@media (max-width: 767px) {
+  .journey-intro {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .journey-preview {
+    max-width: 400px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reason-beam-active {
+    display: none;
+  }
 }
 .feature-scene {
   min-height: 768px;
@@ -366,7 +462,7 @@
 .interview {
   padding: 28px;
   border-radius: 24px;
-  background: #241b30;
+  background: rgb(36 27 48 / 50%);
 }
 .interview h3 {
   font-size: 24px;
@@ -413,7 +509,7 @@
   font-size: 48px;
 }
 .work-tinted {
-  background: #241b30;
+  background: rgb(36 27 48 / 50%);
 }
 .work-bridge {
   padding-block: 80px;

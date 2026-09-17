@@ -11,3 +11,5 @@ Source: https://www.figma.com/design/iy5xJpWFnRg4AxtSYeV17D/
 - Pretendard Variable: https://github.com/orioncactus/pretendard (SIL OFL; Pretendard-LICENSE.txt).
 
 The sample posts are presentation assets, not a live SNS feed. Existing team avatars remain in app/assets.
+
+Decorative illustrations (about-painter/navigate, origin/discovery/expression/connection/cta-art, work-nature/federation) have their exact edge-connected canvas matte made transparent for the animated background. Original RGB artwork and dimensions are preserved; product screenshots are unchanged. No generated image editing was used.

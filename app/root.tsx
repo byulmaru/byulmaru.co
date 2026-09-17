@@ -1,5 +1,6 @@
 import './app.css';
 import './editorial.css';
+import './ambient.css';
 
 import type { ReactNode } from 'react';
 import {
@@ -12,6 +13,7 @@ import {
 } from 'react-router';
 
 import type { Route } from './+types/root';
+import { AmbientBackground } from './components/AmbientBackground';
 import { Footer } from './components/Footer';
 import type { NavItem } from './components/Header';
 import { Header } from './components/Header';
@@ -52,7 +54,8 @@ export function Layout({ children }: { children: ReactNode }) {
 
 export default function App() {
   return (
-    <div className="flex min-h-screen w-full flex-col">
+    <div className="site-shell flex min-h-screen w-full flex-col">
+      <AmbientBackground />
       <RouteAccessibility />
       <Header navItems={navItems} />
 
