@@ -9,7 +9,25 @@ import {
 } from '~/components/WorkMotion';
 
 export function meta() {
-  return [{ title: 'Our Work — 별마루' }];
+  const title = '코스모 | 창작자를 위한 다프로필 SNS — 별마루';
+  const description =
+    '코스모는 하나의 계정에서 여러 프로필을 사용할 수 있는 창작자·동인 커뮤니티를 위한 연합우주 SNS입니다.';
+  const url = 'https://byulmaru.co/our-work';
+
+  return [
+    { title },
+    { name: 'description', content: description },
+    { property: 'og:title', content: title },
+    { property: 'og:description', content: description },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:url', content: url },
+    { property: 'og:image', content: 'https://byulmaru.co/og-image.png' },
+    { name: 'twitter:card', content: 'summary_large_image' },
+  ];
+}
+
+export function links() {
+  return [{ rel: 'canonical', href: 'https://byulmaru.co/our-work' }];
 }
 export default function OurWork() {
   return (
