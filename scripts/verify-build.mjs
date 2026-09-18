@@ -16,27 +16,24 @@ for (const [path, expected] of [
   [
     'build/client/index.html',
     {
-      title: '별마루 | 창작자를 위한 SNS 코스모를 만드는 팀',
-      description:
-        '별마루는 동인 창작 문화를 위한 SNS 코스모를 만드는 팀입니다. 좋아하는 작품과 사람을 발견하고 이야기를 이어 갈 수 있는 공간을 만듭니다.',
+      title: '별마루',
+      description: 'SNS 코스모를 만드는 팀입니다.',
       canonical: 'https://byulmaru.co/',
     },
   ],
   [
     'build/client/about-us/index.html',
     {
-      title: '별마루 팀 소개 | 코스모를 만드는 사람들',
-      description:
-        '별마루는 동인 창작 문화를 직접 향유해 온 세 사람이 모여, 오래 머물 수 있는 SNS 코스모를 만드는 팀입니다.',
+      title: '팀 소개 · 별마루',
+      description: '코스모를 만드는 세 사람의 소개와 인터뷰를 만나보세요.',
       canonical: 'https://byulmaru.co/about-us',
     },
   ],
   [
     'build/client/our-work/index.html',
     {
-      title: '코스모 | 창작자를 위한 다프로필 SNS — 별마루',
-      description:
-        '코스모는 하나의 계정에서 여러 프로필을 사용할 수 있는 창작자·동인 커뮤니티를 위한 연합우주 SNS입니다.',
+      title: '코스모 · 별마루',
+      description: '한 계정에서 여러 프로필로 활동할 수 있는 SNS입니다.',
       canonical: 'https://byulmaru.co/our-work',
     },
   ],

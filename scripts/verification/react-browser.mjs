@@ -23,9 +23,9 @@ const viewports = [
   { width: 1920, height: 1080 },
 ];
 const routes = [
-  ['/', 'Byulmaru'],
-  ['/about-us', 'About us'],
-  ['/our-work', 'Our Work — 별마루'],
+  ['/', '별마루'],
+  ['/about-us', '팀 소개 · 별마루'],
+  ['/our-work', '코스모 · 별마루'],
 ];
 const failures = [];
 let checks = 0;

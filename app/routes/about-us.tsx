@@ -7,9 +7,8 @@ import { team } from '~/components/team';
 import { useAboutSnap } from '~/components/useAboutSnap';
 
 export function meta() {
-  const title = '별마루 팀 소개 | 코스모를 만드는 사람들';
-  const description =
-    '별마루는 동인 창작 문화를 직접 향유해 온 세 사람이 모여, 오래 머물 수 있는 SNS 코스모를 만드는 팀입니다.';
+  const title = '팀 소개 · 별마루';
+  const description = '코스모를 만드는 세 사람의 소개와 인터뷰를 만나보세요.';
   const url = 'https://byulmaru.co/about-us';
 
   return [

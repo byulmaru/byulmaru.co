@@ -11,9 +11,8 @@ import { PostCarousel } from '~/components/PostCarousel';
 import { team } from '~/components/team';
 
 export function meta() {
-  const title = '별마루 | 창작자를 위한 SNS 코스모를 만드는 팀';
-  const description =
-    '별마루는 동인 창작 문화를 위한 SNS 코스모를 만드는 팀입니다. 좋아하는 작품과 사람을 발견하고 이야기를 이어 갈 수 있는 공간을 만듭니다.';
+  const title = '별마루';
+  const description = 'SNS 코스모를 만드는 팀입니다.';
   const url = 'https://byulmaru.co/';
 
   return [

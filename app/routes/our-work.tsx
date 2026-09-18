@@ -9,9 +9,8 @@ import {
 } from '~/components/WorkMotion';
 
 export function meta() {
-  const title = '코스모 | 창작자를 위한 다프로필 SNS — 별마루';
-  const description =
-    '코스모는 하나의 계정에서 여러 프로필을 사용할 수 있는 창작자·동인 커뮤니티를 위한 연합우주 SNS입니다.';
+  const title = '코스모 · 별마루';
+  const description = '한 계정에서 여러 프로필로 활동할 수 있는 SNS입니다.';
   const url = 'https://byulmaru.co/our-work';
 
   return [
