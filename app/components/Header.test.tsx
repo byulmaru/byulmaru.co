@@ -56,6 +56,6 @@ it('shares approved footer copy and official contact destinations', () => {
   );
   expect(screen.getByRole('link', { name: 'X 공식 계정 ↗' })).toHaveAttribute(
     'href',
-    'https://x.com/kos__moe',
+    'https://x.com/kosmo_twit',
   );
 });
