@@ -44,7 +44,7 @@ export function Footer({ navItems }: { navItems: readonly NavItem[] }) {
                 <a href="https://kos.moe/@kosmo">코스모 공식 계정 ↗</a>
               </li>
               <li>
-                <a href="https://x.com/kos__moe">X 공식 계정 ↗</a>
+                <a href="https://x.com/kosmo_twit">X 공식 계정 ↗</a>
               </li>
             </ul>
           </div>
