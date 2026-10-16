@@ -54,7 +54,7 @@ function Profile({ member }: { member: (typeof team)[number] }) {
                   <img
                     className="profile-meme"
                     src={laiosMeme}
-                    alt="진짜 드래곤 마니아들을 보며 자신의 어중간함에 괴로워하는 라이오스"
+                    alt="진짜 드래곤 마니아들을 보며 자신의 어중간함에 괴로워하는 라이오스 짤"
                     width={563}
                     height={475}
                     loading="lazy"
