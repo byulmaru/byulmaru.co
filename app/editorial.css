@@ -1131,6 +1131,12 @@
   .expanded .compact-copy {
     display: none;
   }
+  .hehez .full-intro {
+    display: block;
+  }
+  .hehez .compact-copy {
+    display: none;
+  }
   .button-row {
     gap: 12px;
   }
