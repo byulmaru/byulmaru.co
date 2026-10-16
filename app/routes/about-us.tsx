@@ -1,8 +1,7 @@
 import { motion, useReducedMotion } from 'motion/react';
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router';
 
-import laiosMeme from '~/assets/hehez-laios.png';
 import { AvatarTip, ConvergingPaths, ExperienceTimeline } from '~/components/AboutMotion';
 import { team } from '~/components/team';
 import { useAboutSnap } from '~/components/useAboutSnap';
@@ -47,20 +46,8 @@ function Profile({ member }: { member: (typeof team)[number] }) {
           <h3>{member.title}</h3>
           <p className="compact-copy">{member.compact}</p>
           <div className="full-intro" id={`${member.id}-intro`}>
-            {member.intro.map((p, index) => (
-              <Fragment key={p}>
-                <p>{p}</p>
-                {member.id === 'hehez' && index === 0 && (
-                  <img
-                    className="profile-meme"
-                    src={laiosMeme}
-                    alt="진짜 드래곤 마니아들을 보며 자신의 어중간함에 괴로워하는 라이오스 짤"
-                    width={563}
-                    height={475}
-                    loading="lazy"
-                  />
-                )}
-              </Fragment>
+            {member.intro.map((p) => (
+              <p key={p}>{p}</p>
             ))}
           </div>
           {member.id === 'yuki' ? (

@@ -547,19 +547,8 @@
 .profile-copy h3 {
   font-size: 32px;
 }
-.hehez .full-intro {
-  display: flow-root;
-}
-.profile-copy .full-intro p ~ p {
+.profile-copy .full-intro p + p {
   margin-top: 16px;
-}
-.profile-meme {
-  display: block;
-  float: right;
-  width: 44%;
-  max-width: 240px;
-  height: auto;
-  margin: 16px 0 16px 24px;
 }
 .accent {
   display: block;
@@ -885,12 +874,6 @@
   .profile .full-intro p {
     font-size: 14px;
   }
-  .profile-meme {
-    float: none;
-    width: min(100%, 320px);
-    max-width: none;
-    margin: 20px auto;
-  }
   .interview {
     padding: 24px;
   }
@@ -1149,16 +1132,10 @@
     display: none;
   }
   .hehez .full-intro {
-    display: flow-root;
+    display: block;
   }
   .hehez .compact-copy {
     display: none;
-  }
-  .profile-meme {
-    float: none;
-    width: min(100%, 320px);
-    max-width: none;
-    margin: 20px auto;
   }
   .button-row {
     gap: 12px;
